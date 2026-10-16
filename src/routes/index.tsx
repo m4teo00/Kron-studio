@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, useAnimationControls } from "framer-motion";
 import { FeaturedWorkCarousel } from "@/components/featured-work-carousel";
 import { scrollToContact } from "@/lib/contact-scroll";
-import { SITE_COPY, type Locale } from "@/lib/site-copy";
+import { getSiteCopy, type Locale } from "@/lib/site-copy";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -98,7 +98,7 @@ function Index() {
   useReveal();
   const [open, setOpen] = useState(false);
   const [locale, setLocale] = useState<Locale>("EN");
-  const copy = SITE_COPY[locale];
+  const copy = getSiteCopy(locale);
   const localeFade = useAnimationControls();
   const previousLocale = useRef(locale);
 
@@ -318,7 +318,7 @@ function Index() {
             <div className="grid grid-cols-1 border-l border-t border-border lg:grid-cols-4">
               {copy.process.phases.map((phase, i) => (
                 <Reveal
-                  key={phase.title}
+                  key={`phase-${i}`}
                   delay={i * 100}
                   className="border-b border-r border-border p-7 transition-colors hover:bg-card md:p-9"
                 >
@@ -345,7 +345,7 @@ function Index() {
             </Reveal>
             <div className="lg:col-span-8">
               {copy.faq.items.map((item, i) => (
-                <Reveal key={item.question} delay={i * 80}>
+                <Reveal key={`faq-${i}`} delay={i * 80}>
                   <details className="group border-b border-border py-6 first:border-t">
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-bold md:text-xl">
                       {item.question}
@@ -383,7 +383,7 @@ function Index() {
 }
 
 function FounderSection({ locale }: { locale: Locale }) {
-  const copy = SITE_COPY[locale].founder;
+  const copy = getSiteCopy(locale).founder;
 
   return (
     <section id="founder" className="scroll-mt-16 border-t border-border">
@@ -407,7 +407,7 @@ function FounderSection({ locale }: { locale: Locale }) {
             <div className="flex flex-col justify-center p-7 sm:p-10 md:p-12 lg:p-16">
               <p className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                 <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
-                {copy.role}
+                {copy.title}
               </p>
               <h2 className="max-w-xl text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
                 {copy.name}
@@ -421,7 +421,6 @@ function FounderSection({ locale }: { locale: Locale }) {
                 className="mt-9 inline-flex min-h-12 w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.07] px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-xl transition-colors hover:border-accent/60 hover:bg-white/[0.12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 {copy.cta}
-                <ArrowUpRight aria-hidden="true" className="ml-2 size-4" />
               </a>
             </div>
           </div>
@@ -435,7 +434,7 @@ const WEB3FORMS_KEY = "dfc1fd0e-5a8e-4cff-8bb4-330ba42abeae";
 const FALLBACK_REDIRECT = "https://kron-studio.vercel.app/?submitted=true";
 
 function Inquiry({ locale }: { locale: Locale }) {
-  const copy = SITE_COPY[locale].inquiry;
+  const copy = getSiteCopy(locale).inquiry;
   const redirectRef = useRef<HTMLInputElement>(null);
   const doneRef = useRef<HTMLDivElement>(null);
 
@@ -485,7 +484,7 @@ function Inquiry({ locale }: { locale: Locale }) {
                 {copy.formTitle}
               </h3>
               <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                KRON · {SITE_COPY[locale].footer}
+                KRON · {getSiteCopy(locale).footer}
               </p>
             </div>
             <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">

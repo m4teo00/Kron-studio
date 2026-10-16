@@ -26,7 +26,7 @@ export interface SiteCopy {
   };
   faq: { badge: string; heading: string; items: { question: string; answer: string }[] };
   founder: {
-    role: string;
+    title: string;
     name: string;
     bio: string;
     cta: string;
@@ -159,10 +159,10 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       ],
     },
     founder: {
-      role: "Founder & Designer",
+      title: "Founder & Designer",
       name: "Mateo Kelava",
       bio: "Formally educated web designer. I build custom, high-performance Next.js websites for businesses that value clean aesthetics and fast load times.",
-      cta: "Send Inquiry",
+      cta: "Send Inquiry ↗",
       imageAlt: "Founder in a black suit and burgundy bow tie in front of a modern glass building",
     },
     inquiry: {
@@ -297,15 +297,15 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
         {
           question: "Kako možemo započeti?",
           answer:
-            "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo va��e ciljeve i odgovoriti u roku od 24 sata.",
+            "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo vaše ciljeve i odgovoriti u roku od 24 sata.",
         },
       ],
     },
     founder: {
-      role: "Osnivač i Dizajner",
+      title: "Osnivač i Dizajner",
       name: "Mateo Kelava",
       bio: "Školovani web dizajner. Izrađujem brze i čiste Next.js web stranice za klijente kojima su važni vrhunski dizajn i besprijekorne performanse.",
-      cta: "Pošalji Upit",
+      cta: "Pošalji Upit ↗",
       imageAlt: "Osnivač u crnom odijelu i bordo leptir-mašni ispred moderne staklene zgrade",
     },
     inquiry: {
@@ -367,3 +367,34 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
     },
   },
 };
+
+function withEnglishFallback<T>(english: T, translated: unknown): T {
+  if (Array.isArray(english)) {
+    const translatedItems = Array.isArray(translated) ? translated : [];
+    return english.map((item, index) => withEnglishFallback(item, translatedItems[index])) as T;
+  }
+
+  if (typeof english === "object" && english !== null) {
+    const translatedRecord =
+      typeof translated === "object" && translated !== null && !Array.isArray(translated)
+        ? (translated as Record<string, unknown>)
+        : {};
+
+    return Object.fromEntries(
+      Object.entries(english as Record<string, unknown>).map(([key, value]) => [
+        key,
+        withEnglishFallback(value, translatedRecord[key]),
+      ]),
+    ) as T;
+  }
+
+  if (typeof english === "string") {
+    return (typeof translated === "string" && translated.trim() ? translated : english) as T;
+  }
+
+  return (translated ?? english) as T;
+}
+
+export function getSiteCopy(locale: Locale): SiteCopy {
+  return locale === "HR" ? withEnglishFallback(SITE_COPY.EN, SITE_COPY.HR) : SITE_COPY.EN;
+}
