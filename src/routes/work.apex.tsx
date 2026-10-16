@@ -178,7 +178,7 @@ function ApexCaseStudy() {
         <div className="mx-auto flex min-h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
           <Link
             to="/"
-            hash="#showcase"
+            hash="showcase"
             className="group inline-flex min-h-11 items-center gap-2.5 text-sm text-white/65 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200"
           >
             <ArrowLeft
