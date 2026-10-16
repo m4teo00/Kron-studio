@@ -78,10 +78,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "KRON — Digital Architecture & Growth Studio" },
-      { name: "description", content: "Boutique studio crafting bespoke web platforms, visual identities and Instagram lead systems." },
+      { title: "KRON — Formally Educated Web Design & Next.js Engineering" },
+      {
+        name: "description",
+        content:
+          "Custom, high-performance Next.js websites built by a formally educated web designer. Lightning-fast load times, clean aesthetics, and zero latency.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Next.js developer, web dizajn, izrada web stranica, UI/UX dizajn, high-performance websites, KRON digital studio",
+      },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "KRON Digital Studio" },
+      { property: "og:image", content: "https://krondigital.com/og-image.png" },
+      { property: "og:image:width", content: "1424" },
+      { property: "og:image:height", content: "752" },
+      { property: "og:image:alt", content: "High-Performance Next.js Web Development — KRON" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://krondigital.com/og-image.png" },
     ],
     links: [
       {
@@ -90,7 +105,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Hanken+Grotesk:wght@400;500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Hanken+Grotesk:wght@400;500;600&display=swap",
+      },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),

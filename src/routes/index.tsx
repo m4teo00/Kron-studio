@@ -1,32 +1,70 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, useAnimationControls } from "framer-motion";
 import { FeaturedWorkCarousel } from "@/components/featured-work-carousel";
 import { scrollToContact } from "@/lib/contact-scroll";
-import { SITE_COPY, type Locale } from "@/lib/site-copy";
+import { getSiteCopy, type Locale } from "@/lib/site-copy";
+
+const HOMEPAGE_SEO = {
+  EN: {
+    title: "KRON — Formally Educated Web Design & Next.js Engineering",
+    description:
+      "Custom, high-performance Next.js websites built by a formally educated web designer. Lightning-fast load times, clean aesthetics, and zero latency.",
+    language: "en",
+  },
+  HR: {
+    title: "KRON — Školovani Web Dizajn & Next.js Inženjerstvo",
+    description:
+      "Izrada brzih i čistih Next.js web stranica. Školovani web dizajner posvećen vrhunskoj estetici, brzini i besprijekornim performansama.",
+    language: "hr",
+  },
+} as const;
+
+const OG_IMAGE_URL = "https://krondigital.com/og-image.png";
+const SITE_KEYWORDS =
+  "Next.js developer, web dizajn, izrada web stranica, UI/UX dizajn, high-performance websites, KRON digital studio";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "KRON — Digital Architecture & Growth Studio" },
-      {
-        name: "description",
-        content:
-          "A boutique studio crafting bespoke web platforms, high-end visual identities and direct-response Instagram lead systems.",
-      },
-      { property: "og:title", content: "KRON — Digital Architecture & Growth Studio" },
-      {
-        property: "og:description",
-        content:
-          "Bespoke web platforms, visual identities and direct social pipelines for ambitious market leaders.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const lang = search["lang"];
+    return lang === "HR" || lang === "EN" ? { lang: lang as Locale } : {};
+  },
+  head: ({ match }) => {
+    const seo = match.search.lang === "HR" ? HOMEPAGE_SEO.HR : HOMEPAGE_SEO.EN;
+
+    return {
+      meta: [
+        { title: seo.title },
+        { name: "description", content: seo.description },
+        { name: "keywords", content: SITE_KEYWORDS },
+        { property: "og:title", content: seo.title },
+        { property: "og:description", content: seo.description },
+        { property: "og:url", content: "https://krondigital.com/" },
+        { property: "og:image", content: OG_IMAGE_URL },
+        { property: "og:image:alt", content: "High-Performance Next.js Web Development — KRON" },
+        { property: "og:locale", content: seo.language === "hr" ? "hr_HR" : "en_US" },
+        { name: "twitter:title", content: seo.title },
+        { name: "twitter:description", content: seo.description },
+        { name: "twitter:image", content: OG_IMAGE_URL },
+      ],
+      links: [
+        { rel: "canonical", href: "https://krondigital.com/" },
+        { rel: "alternate", hrefLang: "en", href: "https://krondigital.com/?lang=EN" },
+        { rel: "alternate", hrefLang: "hr", href: "https://krondigital.com/?lang=HR" },
+        { rel: "alternate", hrefLang: "x-default", href: "https://krondigital.com/" },
+      ],
+    };
+  },
   component: Index,
 });
+
+function updateMetaContent(attribute: "name" | "property", key: string, content: string) {
+  const meta = Array.from(document.head.getElementsByTagName("meta")).find(
+    (element) => element.getAttribute(attribute) === key,
+  );
+  if (meta) meta.content = content;
+}
 
 const NAV_HREFS = ["#systems", "#showcase", "#methodology", "#contact"] as const;
 
@@ -96,14 +134,23 @@ function Label({ children }: { children: ReactNode }) {
 
 function Index() {
   useReveal();
+  const { lang } = Route.useSearch();
   const [open, setOpen] = useState(false);
-  const [locale, setLocale] = useState<Locale>("EN");
-  const copy = SITE_COPY[locale];
+  const [locale, setLocale] = useState<Locale>(lang ?? "EN");
+  const copy = getSiteCopy(locale);
   const localeFade = useAnimationControls();
   const previousLocale = useRef(locale);
 
   useEffect(() => {
-    document.documentElement.lang = locale === "HR" ? "hr" : "en";
+    const seo = HOMEPAGE_SEO[locale];
+    document.documentElement.lang = seo.language;
+    document.title = seo.title;
+    updateMetaContent("name", "description", seo.description);
+    updateMetaContent("property", "og:title", seo.title);
+    updateMetaContent("property", "og:description", seo.description);
+    updateMetaContent("property", "og:locale", locale === "HR" ? "hr_HR" : "en_US");
+    updateMetaContent("name", "twitter:title", seo.title);
+    updateMetaContent("name", "twitter:description", seo.description);
 
     if (previousLocale.current !== locale) {
       previousLocale.current = locale;
@@ -113,11 +160,6 @@ function Index() {
       });
     }
   }, [locale, localeFade]);
-
-  useEffect(() => {
-    const submittedLocale = new URLSearchParams(window.location.search).get("lang");
-    if (submittedLocale === "EN" || submittedLocale === "HR") setLocale(submittedLocale);
-  }, []);
 
   return (
     <motion.div
@@ -318,7 +360,7 @@ function Index() {
             <div className="grid grid-cols-1 border-l border-t border-border lg:grid-cols-4">
               {copy.process.phases.map((phase, i) => (
                 <Reveal
-                  key={phase.title}
+                  key={`phase-${i}`}
                   delay={i * 100}
                   className="border-b border-r border-border p-7 transition-colors hover:bg-card md:p-9"
                 >
@@ -345,7 +387,7 @@ function Index() {
             </Reveal>
             <div className="lg:col-span-8">
               {copy.faq.items.map((item, i) => (
-                <Reveal key={item.question} delay={i * 80}>
+                <Reveal key={`faq-${i}`} delay={i * 80}>
                   <details className="group border-b border-border py-6 first:border-t">
                     <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-bold md:text-xl">
                       {item.question}
@@ -383,7 +425,7 @@ function Index() {
 }
 
 function FounderSection({ locale }: { locale: Locale }) {
-  const copy = SITE_COPY[locale].founder;
+  const copy = getSiteCopy(locale).founder;
 
   return (
     <section id="founder" className="scroll-mt-16 border-t border-border">
@@ -405,13 +447,13 @@ function FounderSection({ locale }: { locale: Locale }) {
             </div>
 
             <div className="flex flex-col justify-center p-7 sm:p-10 md:p-12 lg:p-16">
-              <p className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+              <h2 className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                 <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
-                {copy.role}
-              </p>
-              <h2 className="max-w-xl text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
-                {copy.name}
+                {copy.title}
               </h2>
+              <h3 className="max-w-xl text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
+                {copy.name}
+              </h3>
               <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
                 {copy.bio}
               </p>
@@ -421,7 +463,6 @@ function FounderSection({ locale }: { locale: Locale }) {
                 className="mt-9 inline-flex min-h-12 w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.07] px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-xl transition-colors hover:border-accent/60 hover:bg-white/[0.12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 {copy.cta}
-                <ArrowUpRight aria-hidden="true" className="ml-2 size-4" />
               </a>
             </div>
           </div>
@@ -435,7 +476,7 @@ const WEB3FORMS_KEY = "dfc1fd0e-5a8e-4cff-8bb4-330ba42abeae";
 const FALLBACK_REDIRECT = "https://kron-studio.vercel.app/?submitted=true";
 
 function Inquiry({ locale }: { locale: Locale }) {
-  const copy = SITE_COPY[locale].inquiry;
+  const copy = getSiteCopy(locale).inquiry;
   const redirectRef = useRef<HTMLInputElement>(null);
   const doneRef = useRef<HTMLDivElement>(null);
 
@@ -485,7 +526,7 @@ function Inquiry({ locale }: { locale: Locale }) {
                 {copy.formTitle}
               </h3>
               <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                KRON · {SITE_COPY[locale].footer}
+                KRON · {getSiteCopy(locale).footer}
               </p>
             </div>
             <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">

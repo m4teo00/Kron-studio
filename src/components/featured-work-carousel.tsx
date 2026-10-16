@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
-import { SITE_COPY, type Locale } from "@/lib/site-copy";
+import { getSiteCopy, type Locale } from "@/lib/site-copy";
 
 const ROTATION_DURATION = 5;
 
@@ -51,7 +51,7 @@ function usePrefersReducedMotion() {
 }
 
 export function FeaturedWorkCarousel({ locale = "EN" }: { locale?: Locale }) {
-  const copy = SITE_COPY[locale].carousel;
+  const copy = getSiteCopy(locale).carousel;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isManuallyPaused, setIsManuallyPaused] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
