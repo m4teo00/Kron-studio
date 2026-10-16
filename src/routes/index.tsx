@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import { motion, useAnimationControls } from "framer-motion";
 import { FeaturedWorkCarousel } from "@/components/featured-work-carousel";
 import { SITE_COPY, type Locale } from "@/lib/site-copy";
 
@@ -97,10 +98,20 @@ function Index() {
   const [open, setOpen] = useState(false);
   const [locale, setLocale] = useState<Locale>("EN");
   const copy = SITE_COPY[locale];
+  const localeFade = useAnimationControls();
+  const previousLocale = useRef(locale);
 
   useEffect(() => {
     document.documentElement.lang = locale === "HR" ? "hr" : "en";
-  }, [locale]);
+
+    if (previousLocale.current !== locale) {
+      previousLocale.current = locale;
+      void localeFade.start({
+        opacity: [0.88, 1],
+        transition: { duration: 0.28, ease: "easeOut" },
+      });
+    }
+  }, [locale, localeFade]);
 
   useEffect(() => {
     const submittedLocale = new URLSearchParams(window.location.search).get("lang");
@@ -108,7 +119,10 @@ function Index() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <motion.div
+      animate={localeFade}
+      className="relative min-h-screen bg-background text-foreground"
+    >
       <div className="arch-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
 
       {/* NAV */}
@@ -133,7 +147,7 @@ function Index() {
           </nav>
           <div className="flex items-center gap-3">
             <div
-              className="flex items-center rounded-full border border-border p-1"
+              className="flex items-center rounded-full border border-border bg-white/[0.035] p-1 backdrop-blur-xl"
               role="group"
               aria-label={copy.languageLabel}
             >
@@ -354,7 +368,7 @@ function Index() {
           </span>
         </div>
       </footer>
-    </div>
+    </motion.div>
   );
 }
 
