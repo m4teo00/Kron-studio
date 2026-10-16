@@ -25,6 +25,13 @@ export interface SiteCopy {
     phases: { title: string; body: string }[];
   };
   faq: { badge: string; heading: string; items: { question: string; answer: string }[] };
+  founder: {
+    role: string;
+    name: string;
+    bio: string;
+    cta: string;
+    imageAlt: string;
+  };
   inquiry: {
     badge: string;
     heading: string;
@@ -150,6 +157,13 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
             "Fill out the private inquiry form below. We review your goals and get back to you within 24 hours.",
         },
       ],
+    },
+    founder: {
+      role: "Founder & Designer",
+      name: "Tvoje Ime i Prezime",
+      bio: "Formally educated web designer. I build custom, high-performance Next.js websites for businesses that value clean aesthetics and fast load times.",
+      cta: "Send Inquiry",
+      imageAlt: "Founder in a black suit and burgundy bow tie in front of a modern glass building",
     },
     inquiry: {
       badge: "Executive Private Inquiry",
@@ -283,9 +297,16 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
         {
           question: "Kako možemo započeti?",
           answer:
-            "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo vaše ciljeve i odgovoriti u roku od 24 sata.",
+            "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo va��e ciljeve i odgovoriti u roku od 24 sata.",
         },
       ],
+    },
+    founder: {
+      role: "Osnivač i Dizajner",
+      name: "Tvoje Ime i Prezime",
+      bio: "Školovani web dizajner. Izrađujem brze i čiste Next.js web stranice za klijente kojima su važni vrhunski dizajn i besprijekorne performanse.",
+      cta: "Pošalji Upit",
+      imageAlt: "Osnivač u crnom odijelu i bordo leptir-mašni ispred moderne staklene zgrade",
     },
     inquiry: {
       badge: "Privatni Upit za Suradnju",
