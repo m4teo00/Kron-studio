@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import { FeaturedWorkCarousel } from "@/components/featured-work-carousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/")({
 
 const NAV = [
   { href: "#systems", label: "Systems" },
-  { href: "#showcase", label: "Concept Showcase" },
+  { href: "#showcase", label: "Featured Work" },
   { href: "#methodology", label: "Our Methodology" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -197,30 +198,11 @@ function Index() {
         <section id="showcase" className="scroll-mt-16 border-t border-border">
           <div className="mx-auto max-w-7xl px-5 py-24 md:px-10">
             <Reveal>
-              <Label>Authentic Concept Proof</Label>
-              <h2 className="mb-14 text-3xl font-black uppercase tracking-tighter md:text-6xl">Concept Architecture Showcase</h2>
+              <Label>Featured Work</Label>
+              <h2 className="mb-14 max-w-4xl text-3xl font-black uppercase tracking-tighter md:text-6xl">Selected systems. Real outcomes.</h2>
             </Reveal>
             <Reveal>
-              <div className="group grid grid-cols-1 overflow-hidden border border-border bg-card transition-shadow duration-300 hover:shadow-gold lg:grid-cols-2">
-                <div className="overflow-hidden">
-                  <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=80" alt="Apex Estates luxury villa" loading="lazy" className="h-72 w-full object-cover transition-transform duration-300 group-hover:scale-105 lg:h-full" />
-                </div>
-                <div className="flex flex-col justify-between gap-10 p-7 md:p-12">
-                  <div>
-                    <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">Landing Page · Real Estate</span>
-                    <h3 className="mt-4 text-3xl font-black tracking-tight md:text-4xl">Apex Estates — Luxury Real Estate Landing Page</h3>
-                    <div className="mt-8 border-l-2 border-accent pl-5">
-                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Fictional Demo Showcase</p>
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                        Built completely from scratch (0 to 1) to demonstrate raw visual architecture, fast performance, and high-end UI design. This is merely a single landing page sample—representing less than 30% of a full bespoke client ecosystem. Every commercial platform we build is fully customized through direct strategy and collaboration with the client.
-                      </p>
-                    </div>
-                  </div>
-                  <a href="https://apex-estates-seven.vercel.app" target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 bg-primary px-6 py-4 text-sm font-semibold uppercase tracking-[0.15em] text-primary-foreground transition-all hover:bg-accent sm:w-fit">
-                    Launch Live Demo <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
+              <FeaturedWorkCarousel />
             </Reveal>
           </div>
         </section>
