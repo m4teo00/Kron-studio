@@ -3,6 +3,9 @@ export type Locale = "EN" | "HR";
 export interface SiteCopy {
   navigation: string[];
   headerCta: string;
+  languageLabel: string;
+  menuOpen: string;
+  menuClose: string;
   hero: {
     badge: string;
     headline: string;
@@ -39,6 +42,8 @@ export interface SiteCopy {
     selectedWork: string;
     chooseProject: string;
     showProject: string;
+    howBuilt: string;
+    liveDemo: string;
     paused: string;
     autoPlay: string;
     pause: string;
@@ -70,10 +75,14 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
   EN: {
     navigation: ["Services", "Work", "Process", "Contact"],
     headerCta: "Book 5-Min Intro Call",
+    languageLabel: "Choose language",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
     hero: {
       badge: "High-Performance Web Architecture",
       headline: "We build zero-latency digital platforms for ambitious brands.",
-      subtitle: "Next.js, Tailwind CSS, and Edge CDN solutions focused on speed, aesthetic precision, and mobile conversion.",
+      subtitle:
+        "Next.js, Tailwind CSS, and Edge CDN solutions focused on speed, aesthetic precision, and mobile conversion.",
       cta: "Book 5-Min Intro Call",
     },
     services: {
@@ -127,22 +136,26 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       items: [
         {
           question: "How long does a typical project take?",
-          answer: "Most bespoke web platforms and Instagram pipelines are delivered fully functional in 7 to 14 days.",
+          answer:
+            "Most bespoke web platforms and Instagram pipelines are delivered fully functional in 7 to 14 days.",
         },
         {
           question: "Do I own the platform after launch?",
-          answer: "Yes. You receive 100% full ownership of the code, digital assets, and infrastructure.",
+          answer:
+            "Yes. You receive 100% full ownership of the code, digital assets, and infrastructure.",
         },
         {
           question: "How do we get started?",
-          answer: "Fill out the private inquiry form below. We review your goals and get back to you within 24 hours.",
+          answer:
+            "Fill out the private inquiry form below. We review your goals and get back to you within 24 hours.",
         },
       ],
     },
     inquiry: {
       badge: "Executive Private Inquiry",
       heading: "Let's discuss your next digital platform.",
-      description: "Direct communication. No intermediate account managers. Tell us about your project scope.",
+      description:
+        "Direct communication. No intermediate account managers. Tell us about your project scope.",
       received: "Inquiry Received.",
       response: "Our engineering team will review your site and respond within 24 hours.",
       formTitle: "PRIVATE INQUIRY",
@@ -166,6 +179,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       selectedWork: "Selected Work",
       chooseProject: "Choose featured project",
       showProject: "Show project",
+      howBuilt: "How it was built",
+      liveDemo: "Launch Live Demo",
       paused: "Paused",
       autoPlay: "Auto play · 5 sec",
       pause: "Pause carousel",
@@ -177,7 +192,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
           badge: "Concept & Prototype No. 01",
           category: "Architectural Showcase & Infrastructure",
           title: "APEX — High-Performance Architectural Engine",
-          description: "Built as the foundational internal benchmark for KRON Digital Studio. Demonstrates how complex architectural renders load instantly with zero layout shifts via Next.js React Server Components.",
+          description:
+            "Built as the foundational internal benchmark for KRON Digital Studio. Demonstrates how complex architectural renders load instantly with zero layout shifts via Next.js React Server Components.",
           imageAlt: "Modern architectural residence framed by trees at dusk",
           stats: ["< 0.8s Load", "Next.js RSC", "Zero Layout Shift"],
         },
@@ -185,7 +201,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
           badge: "Client Case Study · Heritage & Craft",
           category: "Local Business Platform",
           title: "Restauracija Kelava — Custom Craft & Restoration",
-          description: "High-conversion digital platform engineered for a specialized furniture restoration business. Built to solve high-resolution image rendering bottlenecks and deliver direct mobile WhatsApp/Call leads.",
+          description:
+            "High-conversion digital platform engineered for a specialized furniture restoration business. Built to solve high-resolution image rendering bottlenecks and deliver direct mobile WhatsApp/Call leads.",
           imageAlt: "Carefully crafted furniture in a warm, contemporary interior",
           stats: ["99/100 Lighthouse", "< 0.8s Load", "Mobile Lead Optimized"],
         },
@@ -195,10 +212,14 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
   HR: {
     navigation: ["Usluge", "Radovi", "Proces", "Kontakt"],
     headerCta: "Dogovori 5-Min Poziv",
+    languageLabel: "Odaberite jezik",
+    menuOpen: "Otvori izbornik",
+    menuClose: "Zatvori izbornik",
     hero: {
       badge: "Web Arhitektura Visokih Performansi",
       headline: "Gradimo ultra-brze digitalne platforme za ambiciozne brendove.",
-      subtitle: "Next.js, Tailwind CSS i Edge CDN rješenja fokusirana na brzinu, estetsku preciznost i mobilne konverzije.",
+      subtitle:
+        "Next.js, Tailwind CSS i Edge CDN rješenja fokusirana na brzinu, estetsku preciznost i mobilne konverzije.",
       cta: "Dogovori 5-Min Poziv",
     },
     services: {
@@ -252,22 +273,26 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       items: [
         {
           question: "Koliko obično traje projekt?",
-          answer: "Većina prilagođenih web platformi i Instagram sustava upita spremna je za rad u roku od 7 do 14 dana.",
+          answer:
+            "Većina prilagođenih web platformi i Instagram sustava upita spremna je za rad u roku od 7 do 14 dana.",
         },
         {
           question: "Postaje li platforma moja nakon objave?",
-          answer: "Da. Dobivate potpuno vlasništvo nad kodom, digitalnom imovinom i infrastrukturom.",
+          answer:
+            "Da. Dobivate potpuno vlasništvo nad kodom, digitalnom imovinom i infrastrukturom.",
         },
         {
           question: "Kako možemo započeti?",
-          answer: "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo vaše ciljeve i odgovoriti u roku od 24 sata.",
+          answer:
+            "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo vaše ciljeve i odgovoriti u roku od 24 sata.",
         },
       ],
     },
     inquiry: {
       badge: "Privatni Upit za Suradnju",
       heading: "Razgovarajmo o vašoj sljedećoj digitalnoj platformi.",
-      description: "Izravna komunikacija, bez posrednika. Recite nam više o opsegu svojeg projekta.",
+      description:
+        "Izravna komunikacija, bez posrednika. Recite nam više o opsegu svojeg projekta.",
       received: "Upit je zaprimljen.",
       response: "Naš inženjerski tim pregledat će vašu stranicu i odgovoriti u roku od 24 sata.",
       formTitle: "PRIVATNI UPIT",
@@ -291,6 +316,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       selectedWork: "Odabrani radovi",
       chooseProject: "Odaberite istaknuti projekt",
       showProject: "Prikaži projekt",
+      howBuilt: "Kako je izrađeno",
+      liveDemo: "Otvori demo uživo",
       paused: "Zaustavljeno",
       autoPlay: "Automatski prikaz · 5 s",
       pause: "Zaustavi vrtuljak projekata",
@@ -302,7 +329,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
           badge: "Koncept i prototip br. 01",
           category: "Arhitektonska prezentacija i infrastruktura",
           title: "APEX — arhitektonska platforma visokih performansi",
-          description: "Izrađen kao temeljni interni standard za KRON Digital Studio. Pokazuje kako se složeni arhitektonski prikazi učitavaju trenutačno, bez pomicanja sadržaja, uz Next.js React Server Components.",
+          description:
+            "Izrađen kao temeljni interni standard za KRON Digital Studio. Pokazuje kako se složeni arhitektonski prikazi učitavaju trenutačno, bez pomicanja sadržaja, uz Next.js React Server Components.",
           imageAlt: "Suvremena arhitektonska kuća okružena drvećem u sumrak",
           stats: ["Učitavanje < 0,8 s", "Next.js RSC", "Bez pomicanja sadržaja"],
         },
@@ -310,7 +338,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
           badge: "Studija slučaja · Baština i obrt",
           category: "Platforma za lokalno poslovanje",
           title: "Restauracija Kelava — obnova namještaja i ručni rad",
-          description: "Digitalna platforma visokih konverzija za specijalizirani obrt za restauraciju namještaja. Uklanja uska grla pri prikazu fotografija visoke rezolucije i omogućuje izravne upite putem WhatsAppa i poziva s mobitela.",
+          description:
+            "Digitalna platforma visokih konverzija za specijalizirani obrt za restauraciju namještaja. Uklanja uska grla pri prikazu fotografija visoke rezolucije i omogućuje izravne upite putem WhatsAppa i poziva s mobitela.",
           imageAlt: "Pažljivo izrađen namještaj u toplom, suvremenom interijeru",
           stats: ["Lighthouse 99/100", "Učitavanje < 0,8 s", "Upiti s mobitela"],
         },
