@@ -6,27 +6,63 @@ import { FeaturedWorkCarousel } from "@/components/featured-work-carousel";
 import { scrollToContact } from "@/lib/contact-scroll";
 import { getSiteCopy, type Locale } from "@/lib/site-copy";
 
+const HOMEPAGE_SEO = {
+  EN: {
+    title: "KRON — Formally Educated Web Design & Next.js Engineering",
+    description:
+      "Custom, high-performance Next.js websites built by a formally educated web designer. Lightning-fast load times, clean aesthetics, and zero latency.",
+    language: "en",
+  },
+  HR: {
+    title: "KRON — Školovani Web Dizajn & Next.js Inženjerstvo",
+    description:
+      "Izrada brzih i čistih Next.js web stranica. Školovani web dizajner posvećen vrhunskoj estetici, brzini i besprijekornim performansama.",
+    language: "hr",
+  },
+} as const;
+
+const OG_IMAGE_URL = "https://krondigital.com/og-image.png";
+const SITE_KEYWORDS =
+  "Next.js developer, web dizajn, izrada web stranica, UI/UX dizajn, high-performance websites, KRON digital studio";
+
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "KRON — Digital Architecture & Growth Studio" },
-      {
-        name: "description",
-        content:
-          "A boutique studio crafting bespoke web platforms, high-end visual identities and direct-response Instagram lead systems.",
-      },
-      { property: "og:title", content: "KRON — Digital Architecture & Growth Studio" },
-      {
-        property: "og:description",
-        content:
-          "Bespoke web platforms, visual identities and direct social pipelines for ambitious market leaders.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  validateSearch: (search: Record<string, unknown>) => {
+    const lang = search["lang"];
+    return lang === "HR" || lang === "EN" ? { lang: lang as Locale } : {};
+  },
+  head: ({ match }) => {
+    const seo = match.search.lang === "HR" ? HOMEPAGE_SEO.HR : HOMEPAGE_SEO.EN;
+
+    return {
+      meta: [
+        { title: seo.title },
+        { name: "description", content: seo.description },
+        { name: "keywords", content: SITE_KEYWORDS },
+        { property: "og:title", content: seo.title },
+        { property: "og:description", content: seo.description },
+        { property: "og:url", content: "https://krondigital.com/" },
+        { property: "og:image", content: OG_IMAGE_URL },
+        { property: "og:image:alt", content: "High-Performance Next.js Web Development — KRON" },
+        { property: "og:locale", content: seo.language === "hr" ? "hr_HR" : "en_US" },
+        { name: "twitter:title", content: seo.title },
+        { name: "twitter:description", content: seo.description },
+        { name: "twitter:image", content: OG_IMAGE_URL },
+      ],
+      links: [
+        { rel: "canonical", href: "https://krondigital.com/" },
+        { rel: "alternate", hrefLang: "en", href: "https://krondigital.com/?lang=EN" },
+        { rel: "alternate", hrefLang: "hr", href: "https://krondigital.com/?lang=HR" },
+        { rel: "alternate", hrefLang: "x-default", href: "https://krondigital.com/" },
+      ],
+    };
+  },
   component: Index,
 });
+
+function updateMetaContent(selector: string, content: string) {
+  const meta = document.head.querySelector<HTMLMetaElement>(selector);
+  if (meta) meta.content = content;
+}
 
 const NAV_HREFS = ["#systems", "#showcase", "#methodology", "#contact"] as const;
 
@@ -96,14 +132,23 @@ function Label({ children }: { children: ReactNode }) {
 
 function Index() {
   useReveal();
+  const { lang } = Route.useSearch();
   const [open, setOpen] = useState(false);
-  const [locale, setLocale] = useState<Locale>("EN");
+  const [locale, setLocale] = useState<Locale>(lang ?? "EN");
   const copy = getSiteCopy(locale);
   const localeFade = useAnimationControls();
   const previousLocale = useRef(locale);
 
   useEffect(() => {
-    document.documentElement.lang = locale === "HR" ? "hr" : "en";
+    const seo = HOMEPAGE_SEO[locale];
+    document.documentElement.lang = seo.language;
+    document.title = seo.title;
+    updateMetaContent('meta[name="description"]', seo.description);
+    updateMetaContent('meta[property="og:title"]', seo.title);
+    updateMetaContent('meta[property="og:description"]', seo.description);
+    updateMetaContent('meta[property="og:locale"]', locale === "HR" ? "hr_HR" : "en_US");
+    updateMetaContent('meta[name="twitter:title"]', seo.title);
+    updateMetaContent('meta[name="twitter:description"]', seo.description);
 
     if (previousLocale.current !== locale) {
       previousLocale.current = locale;
@@ -113,11 +158,6 @@ function Index() {
       });
     }
   }, [locale, localeFade]);
-
-  useEffect(() => {
-    const submittedLocale = new URLSearchParams(window.location.search).get("lang");
-    if (submittedLocale === "EN" || submittedLocale === "HR") setLocale(submittedLocale);
-  }, []);
 
   return (
     <motion.div
@@ -405,13 +445,13 @@ function FounderSection({ locale }: { locale: Locale }) {
             </div>
 
             <div className="flex flex-col justify-center p-7 sm:p-10 md:p-12 lg:p-16">
-              <p className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+              <h2 className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                 <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
                 {copy.title}
-              </p>
-              <h2 className="max-w-xl text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
-                {copy.name}
               </h2>
+              <h3 className="max-w-xl text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
+                {copy.name}
+              </h3>
               <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
                 {copy.bio}
               </p>
