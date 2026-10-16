@@ -160,7 +160,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
     },
     founder: {
       role: "Founder & Designer",
-      name: "Tvoje Ime i Prezime",
+      name: "Mateo Kelava",
       bio: "Formally educated web designer. I build custom, high-performance Next.js websites for businesses that value clean aesthetics and fast load times.",
       cta: "Send Inquiry",
       imageAlt: "Founder in a black suit and burgundy bow tie in front of a modern glass building",
@@ -303,7 +303,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
     },
     founder: {
       role: "Osnivač i Dizajner",
-      name: "Tvoje Ime i Prezime",
+      name: "Mateo Kelava",
       bio: "Školovani web dizajner. Izrađujem brze i čiste Next.js web stranice za klijente kojima su važni vrhunski dizajn i besprijekorne performanse.",
       cta: "Pošalji Upit",
       imageAlt: "Osnivač u crnom odijelu i bordo leptir-mašni ispred moderne staklene zgrade",
