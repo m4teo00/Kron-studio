@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, type Variants } from "framer-motion";
+import { scrollToContact } from "@/lib/contact-scroll";
 import {
   ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   Boxes,
   Check,
@@ -87,7 +87,7 @@ const COPY = {
     ctaTitle: "Interested in building a zero-latency digital platform?",
     ctaBody:
       "Tell us what you are building. We will help you shape a fast, thoughtful experience around it.",
-    intro: "Schedule a 5-Minute Intro Call",
+    intro: "Send a Message ↗",
     demo: "Launch Live Demo",
     footer: "Independent digital studio · Built with intention",
     demoLabel: "APEX architectural prototype",
@@ -138,7 +138,7 @@ const COPY = {
     ctaTitle: "Želite izgraditi digitalnu platformu bez čekanja?",
     ctaBody:
       "Recite nam što gradite. Pomoći ćemo vam oblikovati brzo i promišljeno digitalno iskustvo.",
-    intro: "Dogovorite uvodni razgovor od 5 minuta",
+    intro: "Pošalji Poruku ↗",
     demo: "Pokreni demo uživo",
     footer: "Neovisni digitalni studio · Izrađeno s namjerom",
     demoLabel: "APEX arhitektonski prototip",
@@ -385,14 +385,11 @@ function ApexCaseStudy() {
             </div>
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center lg:flex-col lg:items-stretch">
               <a
-                href="/#inquiry"
+                href="/#contact"
+                onClick={scrollToContact}
                 className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-white/20 bg-white/[0.09] px-5 py-3 text-sm font-medium text-white backdrop-blur-xl transition-all hover:border-amber-100/50 hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-100 sm:px-6"
               >
                 {copy.intro}
-                <ArrowRight
-                  className="size-4 transition-transform group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
               </a>
               <a
                 href={DEMO_URL}

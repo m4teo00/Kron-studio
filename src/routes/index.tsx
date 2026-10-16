@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { motion, useAnimationControls } from "framer-motion";
 import { FeaturedWorkCarousel } from "@/components/featured-work-carousel";
+import { scrollToContact } from "@/lib/contact-scroll";
 import { SITE_COPY, type Locale } from "@/lib/site-copy";
 
 export const Route = createFileRoute("/")({
@@ -27,7 +28,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const NAV_HREFS = ["#systems", "#showcase", "#methodology", "#inquiry"] as const;
+const NAV_HREFS = ["#systems", "#showcase", "#methodology", "#contact"] as const;
 
 const SERVICES = [
   {
@@ -139,6 +140,7 @@ function Index() {
               <a
                 key={NAV_HREFS[index]}
                 href={NAV_HREFS[index]}
+                onClick={NAV_HREFS[index] === "#contact" ? scrollToContact : undefined}
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {label}
@@ -164,7 +166,8 @@ function Index() {
               ))}
             </div>
             <a
-              href="#inquiry"
+              href="#contact"
+              onClick={scrollToContact}
               className="hidden bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-accent sm:inline-block"
             >
               {copy.headerCta}
@@ -185,15 +188,21 @@ function Index() {
               <a
                 key={NAV_HREFS[index]}
                 href={NAV_HREFS[index]}
-                onClick={() => setOpen(false)}
+                onClick={(event) => {
+                  if (NAV_HREFS[index] === "#contact") scrollToContact(event);
+                  setOpen(false);
+                }}
                 className="border-b border-border py-4 font-display text-xl font-bold last:border-0"
               >
                 {label}
               </a>
             ))}
             <a
-              href="#inquiry"
-              onClick={() => setOpen(false)}
+              href="#contact"
+              onClick={(event) => {
+                scrollToContact(event);
+                setOpen(false);
+              }}
               className="border-b border-border py-4 font-display text-xl font-bold last:border-0"
             >
               {copy.headerCta}
@@ -228,11 +237,11 @@ function Index() {
             </p>
             <div className="flex items-end lg:col-span-6 lg:justify-end">
               <a
-                href="#systems"
+                href="#contact"
+                onClick={scrollToContact}
                 className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em]"
               >
-                {copy.hero.cta}{" "}
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                {copy.hero.cta}
               </a>
             </div>
           </Reveal>
@@ -354,6 +363,7 @@ function Index() {
           </div>
         </section>
 
+        <FounderSection locale={locale} />
         <Inquiry locale={locale} />
       </main>
 
@@ -372,6 +382,55 @@ function Index() {
   );
 }
 
+function FounderSection({ locale }: { locale: Locale }) {
+  const copy = SITE_COPY[locale].founder;
+
+  return (
+    <section id="founder" className="scroll-mt-16 border-t border-border">
+      <div className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
+        <Reveal>
+          <div className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-[0_40px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-md md:grid-cols-[0.85fr_1.15fr]">
+            <div className="relative aspect-[4/5] overflow-hidden bg-[#09090b]">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Firefly_Gemini%20Flash_Key%20Preservations-__Keep%20his%20original%20facial%20structure%2C%20expression%2C%20and%20skin%20texture%2C%20165454-mDXUiopAMeLPvhElBfedBm2pKwX01S.png"
+                alt={copy.imageAlt}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 size-full object-cover object-top"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#09090b]/55 via-transparent to-transparent"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center p-7 sm:p-10 md:p-12 lg:p-16">
+              <p className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
+                {copy.role}
+              </p>
+              <h2 className="max-w-xl text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
+                {copy.name}
+              </h2>
+              <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
+                {copy.bio}
+              </p>
+              <a
+                href="#contact"
+                onClick={scrollToContact}
+                className="mt-9 inline-flex min-h-12 w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.07] px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-xl transition-colors hover:border-accent/60 hover:bg-white/[0.12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                {copy.cta}
+                <ArrowUpRight aria-hidden="true" className="ml-2 size-4" />
+              </a>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 const WEB3FORMS_KEY = "dfc1fd0e-5a8e-4cff-8bb4-330ba42abeae";
 const FALLBACK_REDIRECT = "https://kron-studio.vercel.app/?submitted=true";
 
@@ -384,7 +443,7 @@ function Inquiry({ locale }: { locale: Locale }) {
     // Fill the post-submit return URL without React state — the form itself
     // stays a fully native POST to Web3Forms.
     if (redirectRef.current) {
-      redirectRef.current.value = `${window.location.origin}/?submitted=true&lang=${locale}#inquiry`;
+      redirectRef.current.value = `${window.location.origin}/?submitted=true&lang=${locale}#contact`;
     }
     // Show the gold confirmation when redirected back with ?submitted=true.
     if (
@@ -400,7 +459,7 @@ function Inquiry({ locale }: { locale: Locale }) {
   const label = "mb-2 block text-xs font-medium uppercase tracking-widest text-muted-foreground";
 
   return (
-    <section id="inquiry" className="scroll-mt-16 border-t border-border bg-card/40">
+    <section id="contact" className="scroll-mt-16 border-t border-border bg-card/40">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 py-24 md:px-10 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
           <Label>{copy.badge}</Label>

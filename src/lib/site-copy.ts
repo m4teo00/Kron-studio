@@ -25,6 +25,13 @@ export interface SiteCopy {
     phases: { title: string; body: string }[];
   };
   faq: { badge: string; heading: string; items: { question: string; answer: string }[] };
+  founder: {
+    role: string;
+    name: string;
+    bio: string;
+    cta: string;
+    imageAlt: string;
+  };
   inquiry: {
     badge: string;
     heading: string;
@@ -74,7 +81,7 @@ export interface SiteCopy {
 export const SITE_COPY: Record<Locale, SiteCopy> = {
   EN: {
     navigation: ["Services", "Work", "Process", "Contact"],
-    headerCta: "Book 5-Min Intro Call",
+    headerCta: "Contact Us",
     languageLabel: "Choose language",
     menuOpen: "Open menu",
     menuClose: "Close menu",
@@ -83,7 +90,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       headline: "We build zero-latency digital platforms for ambitious brands.",
       subtitle:
         "Next.js, Tailwind CSS, and Edge CDN solutions focused on speed, aesthetic precision, and mobile conversion.",
-      cta: "Book 5-Min Intro Call",
+      cta: "Send Inquiry ↗",
     },
     services: {
       badge: "Core Expertise",
@@ -151,11 +158,17 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
         },
       ],
     },
+    founder: {
+      role: "Founder & Designer",
+      name: "Mateo Kelava",
+      bio: "Formally educated web designer. I build custom, high-performance Next.js websites for businesses that value clean aesthetics and fast load times.",
+      cta: "Send Inquiry",
+      imageAlt: "Founder in a black suit and burgundy bow tie in front of a modern glass building",
+    },
     inquiry: {
       badge: "Executive Private Inquiry",
       heading: "Let's discuss your next digital platform.",
-      description:
-        "Direct communication. No intermediate account managers. Tell us about your project scope.",
+      description: "Send us a message with your project details and we'll respond within 24 hours.",
       received: "Inquiry Received.",
       response: "Our engineering team will review your site and respond within 24 hours.",
       formTitle: "PRIVATE INQUIRY",
@@ -211,7 +224,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
   },
   HR: {
     navigation: ["Usluge", "Radovi", "Proces", "Kontakt"],
-    headerCta: "Dogovori 5-Min Poziv",
+    headerCta: "Kontakt",
     languageLabel: "Odaberite jezik",
     menuOpen: "Otvori izbornik",
     menuClose: "Zatvori izbornik",
@@ -220,7 +233,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       headline: "Gradimo ultra-brze digitalne platforme za ambiciozne brendove.",
       subtitle:
         "Next.js, Tailwind CSS i Edge CDN rješenja fokusirana na brzinu, estetsku preciznost i mobilne konverzije.",
-      cta: "Dogovori 5-Min Poziv",
+      cta: "Pošalji Upit ↗",
     },
     services: {
       badge: "Naša Stručnost",
@@ -284,15 +297,22 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
         {
           question: "Kako možemo započeti?",
           answer:
-            "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo vaše ciljeve i odgovoriti u roku od 24 sata.",
+            "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo va��e ciljeve i odgovoriti u roku od 24 sata.",
         },
       ],
+    },
+    founder: {
+      role: "Osnivač i Dizajner",
+      name: "Mateo Kelava",
+      bio: "Školovani web dizajner. Izrađujem brze i čiste Next.js web stranice za klijente kojima su važni vrhunski dizajn i besprijekorne performanse.",
+      cta: "Pošalji Upit",
+      imageAlt: "Osnivač u crnom odijelu i bordo leptir-mašni ispred moderne staklene zgrade",
     },
     inquiry: {
       badge: "Privatni Upit za Suradnju",
       heading: "Razgovarajmo o vašoj sljedećoj digitalnoj platformi.",
       description:
-        "Izravna komunikacija, bez posrednika. Recite nam više o opsegu svojeg projekta.",
+        "Pošaljite nam poruku s detaljima vašeg projekta i odgovorit ćemo u roku od 24 sata.",
       received: "Upit je zaprimljen.",
       response: "Naš inženjerski tim pregledat će vašu stranicu i odgovoriti u roku od 24 sata.",
       formTitle: "PRIVATNI UPIT",
