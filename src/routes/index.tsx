@@ -59,8 +59,10 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function updateMetaContent(selector: string, content: string) {
-  const meta = document.head.querySelector<HTMLMetaElement>(selector);
+function updateMetaContent(attribute: "name" | "property", key: string, content: string) {
+  const meta = Array.from(document.head.getElementsByTagName("meta")).find(
+    (element) => element.getAttribute(attribute) === key,
+  );
   if (meta) meta.content = content;
 }
 
@@ -143,12 +145,12 @@ function Index() {
     const seo = HOMEPAGE_SEO[locale];
     document.documentElement.lang = seo.language;
     document.title = seo.title;
-    updateMetaContent('meta[name="description"]', seo.description);
-    updateMetaContent('meta[property="og:title"]', seo.title);
-    updateMetaContent('meta[property="og:description"]', seo.description);
-    updateMetaContent('meta[property="og:locale"]', locale === "HR" ? "hr_HR" : "en_US");
-    updateMetaContent('meta[name="twitter:title"]', seo.title);
-    updateMetaContent('meta[name="twitter:description"]', seo.description);
+    updateMetaContent("name", "description", seo.description);
+    updateMetaContent("property", "og:title", seo.title);
+    updateMetaContent("property", "og:description", seo.description);
+    updateMetaContent("property", "og:locale", locale === "HR" ? "hr_HR" : "en_US");
+    updateMetaContent("name", "twitter:title", seo.title);
+    updateMetaContent("name", "twitter:description", seo.description);
 
     if (previousLocale.current !== locale) {
       previousLocale.current = locale;
