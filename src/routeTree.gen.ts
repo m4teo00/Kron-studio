@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WorkApexRouteImport } from './routes/work.apex'
 import { Route as WorkRestauracijaKelavaRouteImport } from './routes/work.restauracija-kelava'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkApexRoute = WorkApexRouteImport.update({
+  id: '/work/apex',
+  path: '/work/apex',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorkRestauracijaKelavaRoute = WorkRestauracijaKelavaRouteImport.update({
@@ -25,27 +31,31 @@ const WorkRestauracijaKelavaRoute = WorkRestauracijaKelavaRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/work/apex': typeof WorkApexRoute
   '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/work/apex': typeof WorkApexRoute
   '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/work/apex': typeof WorkApexRoute
   '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/work/restauracija-kelava'
+  fullPaths: '/' | '/work/apex' | '/work/restauracija-kelava'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/work/restauracija-kelava'
-  id: '__root__' | '/' | '/work/restauracija-kelava'
+  to: '/' | '/work/apex' | '/work/restauracija-kelava'
+  id: '__root__' | '/' | '/work/apex' | '/work/restauracija-kelava'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WorkApexRoute: typeof WorkApexRoute
   WorkRestauracijaKelavaRoute: typeof WorkRestauracijaKelavaRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work/apex': {
+      id: '/work/apex'
+      path: '/work/apex'
+      fullPath: '/work/apex'
+      preLoaderRoute: typeof WorkApexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/work/restauracija-kelava': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WorkApexRoute: WorkApexRoute,
   WorkRestauracijaKelavaRoute: WorkRestauracijaKelavaRoute,
 }
 export const routeTree = rootRouteImport
