@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WorkRestauracijaKelavaRouteImport } from './routes/work.restauracija-kelava'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkRestauracijaKelavaRoute = WorkRestauracijaKelavaRouteImport.update({
+  id: '/work/restauracija-kelava',
+  path: '/work/restauracija-kelava',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/work/restauracija-kelava'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/work/restauracija-kelava'
+  id: '__root__' | '/' | '/work/restauracija-kelava'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WorkRestauracijaKelavaRoute: typeof WorkRestauracijaKelavaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work/restauracija-kelava': {
+      id: '/work/restauracija-kelava'
+      path: '/work/restauracija-kelava'
+      fullPath: '/work/restauracija-kelava'
+      preLoaderRoute: typeof WorkRestauracijaKelavaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WorkRestauracijaKelavaRoute: WorkRestauracijaKelavaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
