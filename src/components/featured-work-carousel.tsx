@@ -152,23 +152,23 @@ export function FeaturedWorkCarousel({ locale = "EN" }: { locale?: Locale }) {
             </div>
           </div>
 
-          <div className="flex min-w-0 flex-col justify-between gap-9 p-6 sm:p-9 lg:p-12 xl:p-14">
+          <div className="flex min-w-0 flex-col justify-between gap-9 p-4 sm:p-6 lg:p-9 xl:p-12">
             <div>
               <div className="mb-7 flex min-w-0 flex-wrap items-center gap-3">
-                <span className="max-w-full break-words hyphens-auto whitespace-normal rounded-full border border-accent/30 bg-accent/[0.08] px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent sm:text-xs">
+                <span className="max-w-full whitespace-normal [word-break:keep-all] rounded-full border border-accent/30 bg-accent/[0.08] px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent sm:text-xs">
                   {copy.projects[project.id].badge}
                 </span>
                 <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/45 sm:text-xs">
                   {activeIndex + 1} / {PROJECTS.length}
                 </span>
               </div>
-              <p className="break-words hyphens-auto text-xs font-medium uppercase tracking-[0.2em] text-white/55">
+              <p className="whitespace-normal [word-break:keep-all] text-xs font-medium uppercase tracking-[0.2em] text-white/55">
                 {copy.projects[project.id].category}
               </p>
-              <h3 className="mt-4 max-w-xl break-words hyphens-auto text-3xl font-semibold leading-[1.05] tracking-[-0.045em] text-white sm:text-4xl xl:text-[2.7rem]">
+              <h3 className="mt-4 max-w-xl whitespace-normal [word-break:keep-all] text-2xl font-semibold leading-[1.05] tracking-[-0.045em] text-white sm:text-3xl xl:text-[2.7rem]">
                 {copy.projects[project.id].title}
               </h3>
-              <p className="mt-5 max-w-xl break-words hyphens-auto text-sm leading-7 text-white/65 sm:text-base sm:leading-8">
+              <p className="mt-5 max-w-xl whitespace-normal [word-break:keep-all] text-sm leading-7 text-white/65 sm:text-base sm:leading-8">
                 {copy.projects[project.id].description}
               </p>
 
@@ -176,7 +176,7 @@ export function FeaturedWorkCarousel({ locale = "EN" }: { locale?: Locale }) {
                 {copy.projects[project.id].stats.map((stat) => (
                   <li
                     key={stat}
-                    className="flex min-h-12 min-w-0 items-center break-words rounded-xl border border-white/[0.08] bg-black/20 px-3.5 py-3 text-xs font-medium text-white/75 backdrop-blur-md sm:justify-center sm:px-2 sm:text-center lg:justify-start lg:px-4 lg:text-left xl:justify-center xl:px-2 xl:text-center"
+                    className="flex min-h-12 min-w-0 items-center whitespace-normal [word-break:keep-all] rounded-xl border border-white/[0.08] bg-black/20 px-3.5 py-3 text-xs font-medium text-white/75 backdrop-blur-md sm:justify-center sm:px-2 sm:text-center lg:justify-start lg:px-4 lg:text-left xl:justify-center xl:px-2 xl:text-center"
                   >
                     {stat}
                   </li>

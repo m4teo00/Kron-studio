@@ -230,7 +230,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
     menuClose: "Zatvori izbornik",
     hero: {
       badge: "Web Arhitektura Visokih Performansi",
-      headline: "Gradimo ultra-brze digitalne platforme za ambiciozne brendove.",
+      headline: "Gradimo iznimno brze digitalne platforme za ambiciozne brendove.",
       subtitle:
         "Next.js, Tailwind CSS i Edge CDN rješenja fokusirana na brzinu, estetsku preciznost i mobilne konverzije.",
       cta: "Pošalji Upit ↗",
@@ -258,7 +258,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
     },
     work: { badge: "Odabrani Radovi", heading: "Izrađeno za Brzinu i Konverziju" },
     process: {
-      badge: "KRON-ov inženjerski proces u 4 koraka",
+      badge: "Inženjerski proces studija KRON u 4 koraka",
       heading: "Naša metodologija: od nacrta do lansiranja",
       phaseLabel: "Faza",
       phases: [
@@ -271,7 +271,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
           body: "Jedinstven dizajn u švicarskom uredničkom stilu. Izražajna tipografija, elementi brenda i fluidni rasporedi bez generičkih predložaka.",
         },
         {
-          title: "Full-stack razvoj i postavljanje sustava upita",
+          title: "Razvoj cjelovitih sustava i postavljanje upita",
           body: "Razvoj u Next.jsu i Reactu s učitavanjem kraćim od sekunde. Paralelno postavljamo Instagram sustav za usmjeravanje upita putem poruka i komentara.",
         },
         {
@@ -318,7 +318,7 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       formTitle: "PRIVATNI UPIT",
       formLabels: {
         name: "Ime / Tvrtka",
-        website: "Trenutni URL web-stranice",
+        website: "URL vaše web stranice",
         contact: "E-pošta",
         message: "Opseg projekta i ciljevi",
       },
