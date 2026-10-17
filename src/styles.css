@@ -156,6 +156,15 @@
   h1, h2, h3 { font-family: var(--font-display); }
 }
 
+:lang(hr) {
+  hyphens: none;
+  word-break: keep-all;
+}
+
+:lang(hr) :is(h1, h2, h3, h4, p, span, a, button, li, summary, label) {
+  white-space: normal;
+}
+
 @utility arch-grid {
   background-image:
     linear-gradient(to right, color-mix(in oklab, var(--border) 45%, transparent) 1px, transparent 1px),

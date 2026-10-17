@@ -132,7 +132,9 @@ function useReveal() {
 
 function Label({ children }: { children: ReactNode }) {
   return (
-    <p className="mb-6 text-xs font-semibold uppercase tracking-[0.3em] text-accent">{children}</p>
+    <p className="mb-6 whitespace-normal text-xs font-semibold uppercase tracking-[0.3em] text-accent [word-break:keep-all]">
+      {children}
+    </p>
   );
 }
 
@@ -274,7 +276,7 @@ function Index() {
             </div>
           </Reveal>
           <Reveal delay={100}>
-            <h1 className="max-w-6xl break-words hyphens-auto text-3xl font-black uppercase leading-[0.95] tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="max-w-6xl whitespace-normal [word-break:keep-all] text-3xl font-black uppercase leading-[0.95] tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
               {copy.hero.headline}
             </h1>
           </Reveal>
@@ -322,14 +324,14 @@ function Index() {
                           className="h-full w-full object-cover opacity-80 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100"
                         />
                       </div>
-                      <div className="p-7 md:p-9">
+                      <div className="p-4 sm:p-6 md:p-9">
                         <span className="font-display text-sm font-bold text-accent">
                           {service.n}
                         </span>
-                        <h3 className="mt-3 break-words hyphens-auto text-2xl font-extrabold tracking-tight md:text-3xl">
+                        <h3 className="mt-3 whitespace-normal [word-break:keep-all] text-2xl font-extrabold tracking-tight md:text-3xl">
                           {card.title}
                         </h3>
-                        <p className="mt-4 max-w-xl break-words hyphens-auto leading-relaxed text-muted-foreground">
+                        <p className="mt-4 max-w-xl whitespace-normal [word-break:keep-all] leading-relaxed text-muted-foreground">
                           {card.body}
                         </p>
                       </div>
@@ -346,7 +348,7 @@ function Index() {
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
             <Reveal>
               <Label>{copy.work.badge}</Label>
-              <h2 className="mb-14 max-w-4xl break-words hyphens-auto text-3xl font-black uppercase tracking-tighter md:text-6xl">
+              <h2 className="mb-14 max-w-4xl whitespace-normal [word-break:keep-all] text-3xl font-black uppercase tracking-tighter md:text-6xl">
                 {copy.work.heading}
               </h2>
             </Reveal>
@@ -361,7 +363,7 @@ function Index() {
           <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
             <Reveal>
               <Label>{copy.process.badge}</Label>
-              <h2 className="mb-14 max-w-4xl break-words hyphens-auto text-3xl font-black uppercase tracking-tighter md:text-6xl">
+              <h2 className="mb-14 max-w-4xl whitespace-normal [word-break:keep-all] text-3xl font-black uppercase tracking-tighter md:text-6xl">
                 {copy.process.heading}
               </h2>
             </Reveal>
@@ -454,15 +456,15 @@ function FounderSection({ locale }: { locale: Locale }) {
               />
             </div>
 
-            <div className="flex min-w-0 flex-col justify-center gap-4 p-6 sm:p-10 md:p-12 lg:p-16">
-              <h2 className="inline-flex w-fit max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+            <div className="flex min-w-0 flex-col justify-center gap-4 p-4 sm:p-6 md:p-12 lg:p-16">
+              <h2 className="inline-flex w-fit max-w-full items-center gap-2 whitespace-normal rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent sm:text-xs [word-break:keep-all]">
                 <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
                 {copy.title}
               </h2>
-              <h3 className="max-w-xl break-words hyphens-auto text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
+              <h3 className="max-w-xl whitespace-normal [word-break:keep-all] text-2xl font-black leading-[1.05] tracking-tight sm:text-3xl lg:text-4xl">
                 {copy.name}
               </h3>
-              <p className="max-w-xl break-words hyphens-auto text-base leading-8 text-muted-foreground sm:text-lg">
+              <p className="max-w-xl whitespace-normal [word-break:keep-all] text-base leading-8 text-muted-foreground sm:text-lg">
                 {copy.bio}
               </p>
               <a
@@ -512,10 +514,10 @@ function Inquiry({ locale }: { locale: Locale }) {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-24 sm:px-6 lg:grid-cols-12 lg:px-8">
         <Reveal className="lg:col-span-5">
           <Label>{copy.badge}</Label>
-          <h2 className="break-words hyphens-auto text-3xl font-black uppercase tracking-tighter md:text-6xl">
+          <h2 className="whitespace-normal [word-break:keep-all] text-3xl font-black uppercase tracking-tighter md:text-6xl">
             {copy.heading}
           </h2>
-          <p className="mt-6 max-w-md break-words hyphens-auto leading-relaxed text-muted-foreground">
+          <p className="mt-6 max-w-md whitespace-normal [word-break:keep-all] leading-relaxed text-muted-foreground">
             {copy.description}
           </p>
         </Reveal>
@@ -530,7 +532,7 @@ function Inquiry({ locale }: { locale: Locale }) {
             <p className="font-display text-xl font-black text-accent">{copy.received}</p>
             <p className="mt-2 text-foreground">{copy.response}</p>
           </div>
-          <div className="w-full min-w-0 border border-border bg-card p-5 shadow-2xl sm:p-8 md:p-10">
+          <div className="w-full min-w-0 border border-border bg-card p-4 shadow-2xl sm:p-6 md:p-10">
             <div className="mb-8">
               <h3 className="mb-2 text-xl font-light tracking-tight md:text-2xl">
                 {copy.formTitle}

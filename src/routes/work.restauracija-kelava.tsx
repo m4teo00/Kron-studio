@@ -214,12 +214,12 @@ function RestauracijaKelavaCaseStudy() {
             <p className="mb-5 text-xs font-medium uppercase tracking-[0.28em] text-white/40">
               {copy.workOrdinal}
             </p>
-            <h1 className="max-w-5xl text-[clamp(3.25rem,9vw,8.5rem)] font-medium leading-[0.88] tracking-[-0.075em] text-white">
+            <h1 className="max-w-5xl whitespace-normal [word-break:keep-all] text-[clamp(2.5rem,7vw,8.5rem)] font-medium leading-[0.95] tracking-[-0.06em] text-white">
               Restauracija <span className="text-white/45">Kelava</span>
             </h1>
           </div>
           <div className="min-w-0 max-w-xl border-l border-amber-100/40 pl-5 sm:pl-7 lg:mb-2">
-            <p className="break-words hyphens-auto text-base leading-7 text-white/65 sm:text-lg sm:leading-8">
+            <p className="whitespace-normal [word-break:keep-all] text-base leading-7 text-white/65 sm:text-lg sm:leading-8">
               {copy.subtitle}
             </p>
             <a
@@ -276,12 +276,12 @@ function RestauracijaKelavaCaseStudy() {
             {copy.metadata.map(([label, value], index) => (
               <div
                 key={label}
-                className={`flex min-w-0 flex-col gap-3 p-5 sm:p-7 ${index > 0 ? "border-t border-white/[0.08] md:border-t-0" : ""} ${index % 2 === 1 ? "md:border-l md:border-white/[0.08] lg:border-l-0" : ""} ${index >= 2 ? "md:border-t md:border-white/[0.08] lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-white/[0.08]" : ""}`}
+                className={`flex min-w-0 flex-col gap-3 p-4 sm:p-6 lg:p-7 ${index > 0 ? "border-t border-white/[0.08] md:border-t-0" : ""} ${index % 2 === 1 ? "md:border-l md:border-white/[0.08] lg:border-l-0" : ""} ${index >= 2 ? "md:border-t md:border-white/[0.08] lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-white/[0.08]" : ""}`}
               >
-                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">
+                <p className="whitespace-normal text-[10px] font-medium uppercase tracking-[0.14em] text-white/40 sm:text-xs [word-break:keep-all]">
                   {label}
                 </p>
-                <p className="max-w-xs break-words hyphens-auto text-sm leading-5 text-white/85 sm:text-base">
+                <p className="max-w-xs whitespace-normal [word-break:keep-all] text-sm leading-5 text-white/85 sm:text-base">
                   {value}
                 </p>
               </div>
@@ -341,7 +341,7 @@ function RestauracijaKelavaCaseStudy() {
         </section>
 
         <motion.section
-          className="relative mb-12 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] px-6 py-10 backdrop-blur-xl sm:mb-16 sm:px-10 sm:py-14 lg:px-16 lg:py-16"
+          className="relative mb-12 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] px-4 py-10 backdrop-blur-xl sm:mb-16 sm:px-6 sm:py-14 lg:px-16 lg:py-16"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -356,7 +356,7 @@ function RestauracijaKelavaCaseStudy() {
               <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.24em] text-amber-100/75">
                 {copy.ctaEyebrow}
               </p>
-              <h2 className="break-words hyphens-auto text-3xl font-medium leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
+              <h2 className="whitespace-normal [word-break:keep-all] text-3xl font-medium leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
                 {copy.ctaTitle}
               </h2>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-white/55 sm:text-base">
@@ -447,7 +447,7 @@ function StoryCard({
 }) {
   return (
     <motion.article
-      className="flex h-full min-w-0 flex-col gap-4 rounded-[1.5rem] border border-white/[0.08] bg-white/[0.025] p-6 backdrop-blur-xl sm:p-8 lg:p-9"
+      className="flex h-full min-w-0 flex-col gap-4 rounded-[1.5rem] border border-white/[0.08] bg-white/[0.025] p-4 backdrop-blur-xl sm:p-6 lg:p-8"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.18 }}
@@ -461,13 +461,13 @@ function StoryCard({
           {number}
         </span>
       </div>
-      <h2 className="max-w-lg break-words hyphens-auto text-2xl font-medium leading-tight tracking-[-0.035em] text-white sm:text-3xl">
+      <h2 className="max-w-lg whitespace-normal [word-break:keep-all] text-2xl font-medium leading-tight tracking-[-0.035em] text-white sm:text-3xl">
         {title}
       </h2>
-      <p className="break-words hyphens-auto text-sm leading-7 text-white/55 sm:text-base sm:leading-8">
+      <p className="whitespace-normal [word-break:keep-all] text-sm leading-7 text-white/55 sm:text-base sm:leading-8">
         {body}
       </p>
-      <p className="break-words hyphens-auto border-l border-amber-100/50 pl-4 text-sm leading-7 text-white/80 sm:text-base">
+      <p className="whitespace-normal [word-break:keep-all] border-l border-amber-100/50 pl-4 text-sm leading-7 text-white/80 sm:text-base">
         {highlight}
       </p>
       {principles && (
