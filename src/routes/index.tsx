@@ -102,7 +102,11 @@ function Reveal({
   delay?: number;
 }) {
   return (
-    <div className={`reveal ${className}`} data-reveal style={{ animationDelay: `${delay}ms` }}>
+    <div
+      className={`reveal min-w-0 ${className}`}
+      data-reveal
+      style={{ animationDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );
@@ -164,13 +168,13 @@ function Index() {
   return (
     <motion.div
       animate={localeFade}
-      className="relative min-h-screen bg-background text-foreground"
+      className="relative min-h-screen overflow-x-hidden bg-background text-foreground"
     >
       <div className="arch-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
 
       {/* NAV */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-10">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="#top" className="flex items-center gap-2.5">
             <img src="/logo.png" alt="KRON mark" className="h-9 w-9 rounded-md" />
             <span className="font-display text-2xl font-black tracking-tighter">
@@ -225,7 +229,7 @@ function Index() {
           </div>
         </div>
         {open && (
-          <nav className="flex flex-col border-t border-border bg-background px-5 py-4 lg:hidden">
+          <nav className="flex flex-col border-t border-border bg-background px-4 py-4 sm:px-6 lg:hidden">
             {copy.navigation.map((label, index) => (
               <a
                 key={NAV_HREFS[index]}
@@ -253,9 +257,13 @@ function Index() {
         )}
       </header>
 
-      <main id="top" className="relative">
+      <main
+        id="top"
+        lang={locale === "HR" ? "hr" : "en"}
+        className="relative min-w-0 overflow-x-hidden"
+      >
         {/* HERO */}
-        <section className="mx-auto max-w-7xl px-5 pb-24 pt-20 md:px-10 md:pb-36 md:pt-32">
+        <section className="mx-auto max-w-7xl px-4 pb-24 pt-20 sm:px-6 lg:px-8 md:pb-36 md:pt-32">
           <Reveal>
             <div className="mb-10 inline-flex items-center gap-3 border border-border bg-card px-4 py-2 text-xs font-medium uppercase tracking-[0.18em]">
               <span className="relative flex h-2 w-2">
@@ -266,7 +274,7 @@ function Index() {
             </div>
           </Reveal>
           <Reveal delay={100}>
-            <h1 className="max-w-6xl text-3xl font-black uppercase leading-[0.95] tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="max-w-6xl break-words hyphens-auto text-3xl font-black uppercase leading-[0.95] tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
               {copy.hero.headline}
             </h1>
           </Reveal>
@@ -291,7 +299,7 @@ function Index() {
 
         {/* SERVICES */}
         <section id="systems" className="scroll-mt-16 border-t border-border">
-          <div className="mx-auto max-w-7xl px-5 py-24 md:px-10">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
             <Reveal>
               <Label>{copy.services.badge}</Label>
               <h2 className="mb-14 text-3xl font-black uppercase tracking-tighter md:text-5xl">
@@ -305,8 +313,8 @@ function Index() {
 
                 return (
                   <Reveal key={service.n} delay={i * 120} className={service.span}>
-                    <article className="group h-full overflow-hidden border border-border bg-card transition-shadow duration-300 hover:shadow-gold">
-                      <div className="aspect-[16/10] overflow-hidden lg:aspect-auto lg:h-72">
+                    <article className="group h-full min-w-0 overflow-hidden border border-border bg-card transition-shadow duration-300 hover:shadow-gold">
+                      <div className="aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-72">
                         <img
                           src={service.img}
                           alt={card.imageAlt}
@@ -318,10 +326,10 @@ function Index() {
                         <span className="font-display text-sm font-bold text-accent">
                           {service.n}
                         </span>
-                        <h3 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
+                        <h3 className="mt-3 break-words hyphens-auto text-2xl font-extrabold tracking-tight md:text-3xl">
                           {card.title}
                         </h3>
-                        <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
+                        <p className="mt-4 max-w-xl break-words hyphens-auto leading-relaxed text-muted-foreground">
                           {card.body}
                         </p>
                       </div>
@@ -335,10 +343,10 @@ function Index() {
 
         {/* SHOWCASE */}
         <section id="showcase" className="scroll-mt-16 border-t border-border">
-          <div className="mx-auto max-w-7xl px-5 py-24 md:px-10">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
             <Reveal>
               <Label>{copy.work.badge}</Label>
-              <h2 className="mb-14 max-w-4xl text-3xl font-black uppercase tracking-tighter md:text-6xl">
+              <h2 className="mb-14 max-w-4xl break-words hyphens-auto text-3xl font-black uppercase tracking-tighter md:text-6xl">
                 {copy.work.heading}
               </h2>
             </Reveal>
@@ -350,10 +358,10 @@ function Index() {
 
         {/* METHODOLOGY */}
         <section id="methodology" className="scroll-mt-16 border-t border-border">
-          <div className="mx-auto max-w-7xl px-5 py-24 md:px-10">
+          <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
             <Reveal>
               <Label>{copy.process.badge}</Label>
-              <h2 className="mb-14 max-w-4xl text-3xl font-black uppercase tracking-tighter md:text-6xl">
+              <h2 className="mb-14 max-w-4xl break-words hyphens-auto text-3xl font-black uppercase tracking-tighter md:text-6xl">
                 {copy.process.heading}
               </h2>
             </Reveal>
@@ -378,7 +386,7 @@ function Index() {
 
         {/* FAQ */}
         <section id="faq" className="scroll-mt-16 border-t border-border">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 py-24 md:px-10 lg:grid-cols-12">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-24 sm:px-6 lg:grid-cols-12 lg:px-8">
             <Reveal className="lg:col-span-4">
               <Label>{copy.faq.badge}</Label>
               <h2 className="text-3xl font-black uppercase tracking-tighter md:text-5xl">
@@ -410,7 +418,7 @@ function Index() {
       </main>
 
       <footer className="relative border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-10 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-10 text-sm text-muted-foreground sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <span className="flex items-center gap-2 font-display text-xl font-black tracking-tighter text-foreground">
             <img src="/logo.png" alt="KRON mark" className="h-7 w-7 rounded" />
             KRON<span className="text-accent">.</span>
@@ -429,9 +437,9 @@ function FounderSection({ locale }: { locale: Locale }) {
 
   return (
     <section id="founder" className="scroll-mt-16 border-t border-border">
-      <div className="mx-auto max-w-7xl px-5 py-20 md:px-10 md:py-28">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 md:py-28">
         <Reveal>
-          <div className="grid overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-[0_40px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-md md:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid min-w-0 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-[0_40px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-md md:grid-cols-[0.85fr_1.15fr]">
             <div className="relative aspect-[4/5] overflow-hidden bg-[#09090b]">
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Firefly_Gemini%20Flash_Key%20Preservations-__Keep%20his%20original%20facial%20structure%2C%20expression%2C%20and%20skin%20texture%2C%20165454-mDXUiopAMeLPvhElBfedBm2pKwX01S.png"
@@ -446,21 +454,21 @@ function FounderSection({ locale }: { locale: Locale }) {
               />
             </div>
 
-            <div className="flex flex-col justify-center p-7 sm:p-10 md:p-12 lg:p-16">
-              <h2 className="mb-7 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+            <div className="flex min-w-0 flex-col justify-center gap-4 p-6 sm:p-10 md:p-12 lg:p-16">
+              <h2 className="inline-flex w-fit max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                 <span aria-hidden="true" className="size-1.5 rounded-full bg-accent" />
                 {copy.title}
               </h2>
-              <h3 className="max-w-xl text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
+              <h3 className="max-w-xl break-words hyphens-auto text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl">
                 {copy.name}
               </h3>
-              <p className="mt-6 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
+              <p className="max-w-xl break-words hyphens-auto text-base leading-8 text-muted-foreground sm:text-lg">
                 {copy.bio}
               </p>
               <a
                 href="#contact"
                 onClick={scrollToContact}
-                className="mt-9 inline-flex min-h-12 w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.07] px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-xl transition-colors hover:border-accent/60 hover:bg-white/[0.12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="inline-flex min-h-12 w-fit max-w-full items-center justify-center rounded-full border border-white/15 bg-white/[0.07] px-6 py-3 text-sm font-semibold text-foreground backdrop-blur-xl transition-colors hover:border-accent/60 hover:bg-white/[0.12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 {copy.cta}
               </a>
@@ -497,17 +505,19 @@ function Inquiry({ locale }: { locale: Locale }) {
 
   const input =
     "w-full border border-input bg-background px-4 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none transition-colors duration-200";
-  const label = "mb-2 block text-xs font-medium uppercase tracking-widest text-muted-foreground";
+  const label = "text-xs font-medium uppercase tracking-widest text-muted-foreground";
 
   return (
     <section id="contact" className="scroll-mt-16 border-t border-border bg-card/40">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 py-24 md:px-10 lg:grid-cols-12">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-24 sm:px-6 lg:grid-cols-12 lg:px-8">
         <Reveal className="lg:col-span-5">
           <Label>{copy.badge}</Label>
-          <h2 className="text-3xl font-black uppercase tracking-tighter md:text-6xl">
+          <h2 className="break-words hyphens-auto text-3xl font-black uppercase tracking-tighter md:text-6xl">
             {copy.heading}
           </h2>
-          <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">{copy.description}</p>
+          <p className="mt-6 max-w-md break-words hyphens-auto leading-relaxed text-muted-foreground">
+            {copy.description}
+          </p>
         </Reveal>
         <Reveal className="lg:col-span-7">
           <div
@@ -520,7 +530,7 @@ function Inquiry({ locale }: { locale: Locale }) {
             <p className="font-display text-xl font-black text-accent">{copy.received}</p>
             <p className="mt-2 text-foreground">{copy.response}</p>
           </div>
-          <div className="w-full border border-border bg-card p-8 shadow-2xl md:p-10">
+          <div className="w-full min-w-0 border border-border bg-card p-5 shadow-2xl sm:p-8 md:p-10">
             <div className="mb-8">
               <h3 className="mb-2 text-xl font-light tracking-tight md:text-2xl">
                 {copy.formTitle}
@@ -529,7 +539,11 @@ function Inquiry({ locale }: { locale: Locale }) {
                 KRON · {getSiteCopy(locale).footer}
               </p>
             </div>
-            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-6">
+            <form
+              action="https://api.web3forms.com/submit"
+              method="POST"
+              className="flex flex-col gap-6"
+            >
               <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
               <input
                 ref={redirectRef}
@@ -538,7 +552,7 @@ function Inquiry({ locale }: { locale: Locale }) {
                 defaultValue={FALLBACK_REDIRECT}
               />
               <input type="hidden" name="subject" value="New KRON Private Inquiry" />
-              <div>
+              <div className="flex flex-col gap-2">
                 <label htmlFor="f-name" className={label}>
                   {copy.formLabels.name}
                 </label>
@@ -552,7 +566,7 @@ function Inquiry({ locale }: { locale: Locale }) {
                   className={input}
                 />
               </div>
-              <div>
+              <div className="flex flex-col gap-2">
                 <label htmlFor="f-web" className={label}>
                   {copy.formLabels.website}
                 </label>
@@ -565,7 +579,7 @@ function Inquiry({ locale }: { locale: Locale }) {
                   className={input}
                 />
               </div>
-              <div>
+              <div className="flex flex-col gap-2">
                 <label htmlFor="f-contact" className={label}>
                   {copy.formLabels.contact}
                 </label>
@@ -579,7 +593,7 @@ function Inquiry({ locale }: { locale: Locale }) {
                   className={input}
                 />
               </div>
-              <div>
+              <div className="flex flex-col gap-2">
                 <label htmlFor="f-msg" className={label}>
                   {copy.formLabels.message}
                 </label>

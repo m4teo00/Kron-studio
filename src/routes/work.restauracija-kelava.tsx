@@ -155,7 +155,10 @@ function RestauracijaKelavaCaseStudy() {
   }, [locale]);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#09090b] text-white selection:bg-amber-200 selection:text-black">
+    <main
+      lang={locale === "HR" ? "hr" : "en"}
+      className="relative min-h-screen overflow-x-hidden bg-[#09090b] text-white selection:bg-amber-200 selection:text-black"
+    >
       <div className="pointer-events-none absolute inset-0 -z-0 overflow-hidden" aria-hidden="true">
         <div className="arch-grid absolute inset-0 opacity-[0.13]" />
         <div className="absolute -top-56 left-1/2 h-[34rem] w-[54rem] -translate-x-1/2 rounded-full bg-amber-200/[0.055] blur-[130px]" />
@@ -163,7 +166,7 @@ function RestauracijaKelavaCaseStudy() {
       </div>
 
       <header className="relative z-10 border-b border-white/[0.08] bg-[#09090b]/70 backdrop-blur-xl">
-        <div className="mx-auto flex min-h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto flex min-h-[4.5rem] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
           <Link
             to="/"
             hash="showcase"
@@ -196,7 +199,7 @@ function RestauracijaKelavaCaseStudy() {
         </div>
       </header>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.section
           className="grid gap-12 pb-16 pt-16 sm:pb-20 sm:pt-24 lg:grid-cols-[minmax(0,1.15fr)_minmax(17rem,0.85fr)] lg:items-end lg:gap-16 lg:pb-24 lg:pt-32"
           initial="hidden"
@@ -215,8 +218,8 @@ function RestauracijaKelavaCaseStudy() {
               Restauracija <span className="text-white/45">Kelava</span>
             </h1>
           </div>
-          <div className="max-w-xl border-l border-amber-100/40 pl-5 sm:pl-7 lg:mb-2">
-            <p className="text-base leading-7 text-white/65 sm:text-lg sm:leading-8">
+          <div className="min-w-0 max-w-xl border-l border-amber-100/40 pl-5 sm:pl-7 lg:mb-2">
+            <p className="break-words hyphens-auto text-base leading-7 text-white/65 sm:text-lg sm:leading-8">
               {copy.subtitle}
             </p>
             <a
@@ -269,16 +272,16 @@ function RestauracijaKelavaCaseStudy() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 border-t border-white/[0.08] lg:grid-cols-4">
+          <div className="grid grid-cols-1 border-t border-white/[0.08] md:grid-cols-2 lg:grid-cols-4">
             {copy.metadata.map(([label, value], index) => (
               <div
                 key={label}
-                className={`min-h-[7.4rem] p-5 sm:p-7 ${index % 2 === 1 ? "border-l border-white/[0.08] lg:border-l-0" : ""} ${index >= 2 ? "border-t border-white/[0.08] lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-white/[0.08]" : ""}`}
+                className={`flex min-w-0 flex-col gap-3 p-5 sm:p-7 ${index > 0 ? "border-t border-white/[0.08] md:border-t-0" : ""} ${index % 2 === 1 ? "md:border-l md:border-white/[0.08] lg:border-l-0" : ""} ${index >= 2 ? "md:border-t md:border-white/[0.08] lg:border-t-0" : ""} ${index > 0 ? "lg:border-l lg:border-white/[0.08]" : ""}`}
               >
                 <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">
                   {label}
                 </p>
-                <p className="mt-3 max-w-xs text-sm leading-5 text-white/85 sm:text-base">
+                <p className="max-w-xs break-words hyphens-auto text-sm leading-5 text-white/85 sm:text-base">
                   {value}
                 </p>
               </div>
@@ -319,7 +322,7 @@ function RestauracijaKelavaCaseStudy() {
           </div>
         </motion.section>
 
-        <section className="grid gap-5 border-t border-white/[0.08] py-16 sm:py-24 lg:grid-cols-2 lg:gap-8">
+        <section className="grid min-w-0 grid-cols-1 gap-5 border-t border-white/[0.08] py-16 sm:py-24 md:grid-cols-2 md:gap-8">
           <StoryCard
             icon={Layers3}
             number={copy.challengeLabel}
@@ -353,7 +356,7 @@ function RestauracijaKelavaCaseStudy() {
               <p className="mb-4 text-[10px] font-medium uppercase tracking-[0.24em] text-amber-100/75">
                 {copy.ctaEyebrow}
               </p>
-              <h2 className="text-3xl font-medium leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
+              <h2 className="break-words hyphens-auto text-3xl font-medium leading-tight tracking-[-0.045em] text-white sm:text-4xl lg:text-5xl">
                 {copy.ctaTitle}
               </h2>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-white/55 sm:text-base">
@@ -383,7 +386,7 @@ function RestauracijaKelavaCaseStudy() {
       </div>
 
       <footer className="relative z-10 border-t border-white/[0.08]">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-7 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-7 text-xs text-white/35 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <Link to="/" className="font-semibold tracking-[0.2em] text-white/75">
             KRON<span className="text-amber-100">.</span>
           </Link>
@@ -444,7 +447,7 @@ function StoryCard({
 }) {
   return (
     <motion.article
-      className="flex h-full flex-col rounded-[1.5rem] border border-white/[0.08] bg-white/[0.025] p-6 backdrop-blur-xl sm:p-8 lg:p-9"
+      className="flex h-full min-w-0 flex-col gap-4 rounded-[1.5rem] border border-white/[0.08] bg-white/[0.025] p-6 backdrop-blur-xl sm:p-8 lg:p-9"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.18 }}
@@ -458,15 +461,17 @@ function StoryCard({
           {number}
         </span>
       </div>
-      <h2 className="mt-9 max-w-lg text-2xl font-medium leading-tight tracking-[-0.035em] text-white sm:text-3xl">
+      <h2 className="max-w-lg break-words hyphens-auto text-2xl font-medium leading-tight tracking-[-0.035em] text-white sm:text-3xl">
         {title}
       </h2>
-      <p className="mt-5 text-sm leading-7 text-white/55 sm:text-base sm:leading-8">{body}</p>
-      <p className="mt-5 border-l border-amber-100/50 pl-4 text-sm leading-7 text-white/80 sm:text-base">
+      <p className="break-words hyphens-auto text-sm leading-7 text-white/55 sm:text-base sm:leading-8">
+        {body}
+      </p>
+      <p className="break-words hyphens-auto border-l border-amber-100/50 pl-4 text-sm leading-7 text-white/80 sm:text-base">
         {highlight}
       </p>
       {principles && (
-        <ul className="mt-8 flex flex-col gap-3 border-t border-white/[0.08] pt-6">
+        <ul className="flex flex-col gap-3 border-t border-white/[0.08] pt-6">
           {principles.map((principle) => (
             <li key={principle} className="flex items-start gap-3 text-sm text-white/55">
               <Check className="mt-0.5 size-4 shrink-0 text-amber-100/80" aria-hidden="true" />
