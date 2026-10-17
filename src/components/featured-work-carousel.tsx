@@ -132,7 +132,7 @@ export function FeaturedWorkCarousel({ locale = "EN" }: { locale?: Locale }) {
 
         <article
           key={project.id}
-          className="featured-carousel-slide grid min-h-[34rem] grid-cols-1 lg:min-h-[38rem] lg:grid-cols-2"
+          className="featured-carousel-slide grid min-h-[34rem] min-w-0 grid-cols-1 lg:min-h-[38rem] lg:grid-cols-2"
           role="group"
           aria-roledescription="slide"
           aria-label={`${activeIndex + 1} / ${PROJECTS.length}: ${copy.projects[project.id].title}`}
@@ -152,23 +152,23 @@ export function FeaturedWorkCarousel({ locale = "EN" }: { locale?: Locale }) {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between gap-9 p-6 sm:p-9 lg:p-12 xl:p-14">
+          <div className="flex min-w-0 flex-col justify-between gap-9 p-6 sm:p-9 lg:p-12 xl:p-14">
             <div>
-              <div className="mb-7 flex flex-wrap items-center gap-3">
-                <span className="rounded-full border border-accent/30 bg-accent/[0.08] px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent sm:text-xs">
+              <div className="mb-7 flex min-w-0 flex-wrap items-center gap-3">
+                <span className="max-w-full break-words hyphens-auto whitespace-normal rounded-full border border-accent/30 bg-accent/[0.08] px-3.5 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent sm:text-xs">
                   {copy.projects[project.id].badge}
                 </span>
                 <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/45 sm:text-xs">
                   {activeIndex + 1} / {PROJECTS.length}
                 </span>
               </div>
-              <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/55">
+              <p className="break-words hyphens-auto text-xs font-medium uppercase tracking-[0.2em] text-white/55">
                 {copy.projects[project.id].category}
               </p>
-              <h3 className="mt-4 max-w-xl text-3xl font-semibold leading-[1.05] tracking-[-0.045em] text-white sm:text-4xl xl:text-[2.7rem]">
+              <h3 className="mt-4 max-w-xl break-words hyphens-auto text-3xl font-semibold leading-[1.05] tracking-[-0.045em] text-white sm:text-4xl xl:text-[2.7rem]">
                 {copy.projects[project.id].title}
               </h3>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-white/65 sm:text-base sm:leading-8">
+              <p className="mt-5 max-w-xl break-words hyphens-auto text-sm leading-7 text-white/65 sm:text-base sm:leading-8">
                 {copy.projects[project.id].description}
               </p>
 
@@ -176,7 +176,7 @@ export function FeaturedWorkCarousel({ locale = "EN" }: { locale?: Locale }) {
                 {copy.projects[project.id].stats.map((stat) => (
                   <li
                     key={stat}
-                    className="flex min-h-12 items-center rounded-xl border border-white/[0.08] bg-black/20 px-3.5 py-3 text-xs font-medium text-white/75 backdrop-blur-md sm:justify-center sm:px-2 sm:text-center lg:justify-start lg:px-4 lg:text-left xl:justify-center xl:px-2 xl:text-center"
+                    className="flex min-h-12 min-w-0 items-center break-words rounded-xl border border-white/[0.08] bg-black/20 px-3.5 py-3 text-xs font-medium text-white/75 backdrop-blur-md sm:justify-center sm:px-2 sm:text-center lg:justify-start lg:px-4 lg:text-left xl:justify-center xl:px-2 xl:text-center"
                   >
                     {stat}
                   </li>
