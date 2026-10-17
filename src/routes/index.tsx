@@ -511,112 +511,116 @@ function Inquiry({ locale }: { locale: Locale }) {
 
   return (
     <section id="contact" className="scroll-mt-16 border-t border-border bg-card/40">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 py-24 sm:px-6 lg:grid-cols-12 lg:px-8">
-        <Reveal className="lg:col-span-5">
-          <Label>{copy.badge}</Label>
-          <h2 className="whitespace-normal [word-break:keep-all] text-3xl font-black uppercase tracking-tighter md:text-6xl">
-            {copy.heading}
-          </h2>
-          <p className="mt-6 max-w-md whitespace-normal [word-break:keep-all] leading-relaxed text-muted-foreground">
-            {copy.description}
-          </p>
-        </Reveal>
-        <Reveal className="lg:col-span-7">
-          <div
-            ref={doneRef}
-            hidden
-            role="status"
-            className="mb-6 border border-accent bg-accent/10 p-6 shadow-gold"
-            style={{ animation: "rise 0.6s ease-out both" }}
-          >
-            <p className="font-display text-xl font-black text-accent">{copy.received}</p>
-            <p className="mt-2 text-foreground">{copy.response}</p>
-          </div>
-          <div className="w-full min-w-0 border border-border bg-card p-4 shadow-2xl sm:p-6 md:p-10">
-            <div className="mb-8">
-              <h3 className="mb-2 text-xl font-light tracking-tight md:text-2xl">
-                {copy.formTitle}
-              </h3>
-              <p className="text-xs uppercase tracking-widest text-muted-foreground">
-                KRON · {getSiteCopy(locale).footer}
-              </p>
-            </div>
-            <form
-              action="https://api.web3forms.com/submit"
-              method="POST"
-              className="flex flex-col gap-6"
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 px-4 py-24 sm:px-6 md:grid-cols-2 lg:gap-12 lg:px-8">
+        <div className="min-w-0">
+          <Reveal>
+            <Label>{copy.badge}</Label>
+            <h2 className="whitespace-normal [word-break:keep-all] text-3xl font-black uppercase tracking-tighter md:text-6xl">
+              {copy.heading}
+            </h2>
+            <p className="mt-6 max-w-md whitespace-normal [word-break:keep-all] leading-relaxed text-muted-foreground">
+              {copy.description}
+            </p>
+          </Reveal>
+        </div>
+        <div className="min-w-0">
+          <Reveal>
+            <div
+              ref={doneRef}
+              hidden
+              role="status"
+              className="mb-6 border border-accent bg-accent/10 p-6 shadow-gold"
+              style={{ animation: "rise 0.6s ease-out both" }}
             >
-              <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
-              <input
-                ref={redirectRef}
-                type="hidden"
-                name="redirect"
-                defaultValue={FALLBACK_REDIRECT}
-              />
-              <input type="hidden" name="subject" value="New KRON Private Inquiry" />
-              <div className="flex flex-col gap-2">
-                <label htmlFor="f-name" className={label}>
-                  {copy.formLabels.name}
-                </label>
-                <input
-                  id="f-name"
-                  type="text"
-                  name="name"
-                  required
-                  autoComplete="name"
-                  placeholder={copy.placeholders.name}
-                  className={input}
-                />
+              <p className="font-display text-xl font-black text-accent">{copy.received}</p>
+              <p className="mt-2 text-foreground">{copy.response}</p>
+            </div>
+            <div className="w-full min-w-0 border border-border bg-card p-4 shadow-2xl sm:p-6 md:p-10">
+              <div className="mb-8">
+                <h3 className="mb-2 text-xl font-light tracking-tight md:text-2xl">
+                  {copy.formTitle}
+                </h3>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground">
+                  KRON · {getSiteCopy(locale).footer}
+                </p>
               </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="f-web" className={label}>
-                  {copy.formLabels.website}
-                </label>
-                <input
-                  id="f-web"
-                  type="url"
-                  name="website"
-                  autoComplete="url"
-                  placeholder={copy.placeholders.website}
-                  className={input}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="f-contact" className={label}>
-                  {copy.formLabels.contact}
-                </label>
-                <input
-                  id="f-contact"
-                  type="text"
-                  name="email"
-                  required
-                  autoComplete="email"
-                  placeholder={copy.placeholders.contact}
-                  className={input}
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="f-msg" className={label}>
-                  {copy.formLabels.message}
-                </label>
-                <textarea
-                  id="f-msg"
-                  name="message"
-                  rows={4}
-                  required
-                  placeholder={copy.placeholders.message}
-                  className={`${input} resize-none`}
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-4 w-full cursor-pointer bg-accent px-6 py-4 text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-colors duration-300 hover:bg-foreground hover:text-background"
+              <form
+                action="https://api.web3forms.com/submit"
+                method="POST"
+                className="flex flex-col gap-6"
               >
-                {copy.submit}
-              </button>
-            </form>
-          </div>
-        </Reveal>
+                <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+                <input
+                  ref={redirectRef}
+                  type="hidden"
+                  name="redirect"
+                  defaultValue={FALLBACK_REDIRECT}
+                />
+                <input type="hidden" name="subject" value="New KRON Private Inquiry" />
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="f-name" className={label}>
+                    {copy.formLabels.name}
+                  </label>
+                  <input
+                    id="f-name"
+                    type="text"
+                    name="name"
+                    required
+                    autoComplete="name"
+                    placeholder={copy.placeholders.name}
+                    className={input}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="f-web" className={label}>
+                    {copy.formLabels.website}
+                  </label>
+                  <input
+                    id="f-web"
+                    type="url"
+                    name="website"
+                    autoComplete="url"
+                    placeholder={copy.placeholders.website}
+                    className={input}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="f-contact" className={label}>
+                    {copy.formLabels.contact}
+                  </label>
+                  <input
+                    id="f-contact"
+                    type="text"
+                    name="email"
+                    required
+                    autoComplete="email"
+                    placeholder={copy.placeholders.contact}
+                    className={input}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="f-msg" className={label}>
+                    {copy.formLabels.message}
+                  </label>
+                  <textarea
+                    id="f-msg"
+                    name="message"
+                    rows={4}
+                    required
+                    placeholder={copy.placeholders.message}
+                    className={`${input} resize-none`}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="mt-4 w-full cursor-pointer bg-accent px-6 py-4 text-xs font-semibold uppercase tracking-widest text-accent-foreground transition-colors duration-300 hover:bg-foreground hover:text-background"
+                >
+                  {copy.submit}
+                </button>
+              </form>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
