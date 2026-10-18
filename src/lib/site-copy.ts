@@ -2,7 +2,6 @@ export type Locale = "EN" | "HR";
 
 export interface SiteCopy {
   navigation: string[];
-  headerCta: string;
   languageLabel: string;
   menuOpen: string;
   menuClose: string;
@@ -81,7 +80,6 @@ export interface SiteCopy {
 export const SITE_COPY: Record<Locale, SiteCopy> = {
   EN: {
     navigation: ["Services", "Work", "Process", "Contact"],
-    headerCta: "Contact Us",
     languageLabel: "Choose language",
     menuOpen: "Open menu",
     menuClose: "Close menu",
@@ -224,7 +222,6 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
   },
   HR: {
     navigation: ["Usluge", "Radovi", "Proces", "Kontakt"],
-    headerCta: "Kontakt",
     languageLabel: "Odaberite jezik",
     menuOpen: "Otvori izbornik",
     menuClose: "Zatvori izbornik",
