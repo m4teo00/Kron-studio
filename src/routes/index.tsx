@@ -213,13 +213,6 @@ function Index() {
                 </button>
               ))}
             </div>
-            <a
-              href="#contact"
-              onClick={scrollToContact}
-              className="hidden bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-accent sm:inline-block"
-            >
-              {copy.headerCta}
-            </a>
             <button
               className="p-2 lg:hidden"
               onClick={() => setOpen(!open)}
@@ -245,16 +238,6 @@ function Index() {
                 {label}
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={(event) => {
-                scrollToContact(event);
-                setOpen(false);
-              }}
-              className="border-b border-border py-4 font-display text-xl font-bold last:border-0"
-            >
-              {copy.headerCta}
-            </a>
           </nav>
         )}
       </header>
