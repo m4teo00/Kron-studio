@@ -6,32 +6,24 @@ const ROTATION_DURATION = 5;
 
 const PROJECTS = [
   {
-    id: "apex",
-    badge: "Concept & Prototype No. 01",
-    category: "Architectural Showcase & Infrastructure",
-    title: "APEX — High-Performance Architectural Engine",
-    description:
-      "Built as the foundational internal benchmark for KRON Digital Studio. Demonstrates how complex architectural renders load instantly with zero layout shifts via Next.js React Server Components.",
-    image:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=85",
-    imageAlt: "Modern architectural residence framed by trees at dusk",
-    stats: ["< 0.8s Load", "Next.js RSC", "Zero Layout Shift"],
-    detailsHref: "/work/apex",
-    demoHref: "https://apex-estates-seven.vercel.app",
+    id: "cavaliero",
+    image: "/cavaliero-header.png",
+    detailsHref: "/work/cavaliero",
+    demoHref: "https://www.cavaliero.ba/",
   },
   {
     id: "kelava",
-    badge: "Client Case Study · Heritage & Craft",
-    category: "Local Business Platform",
-    title: "Restauracija Kelava — Custom Craft & Restoration",
-    description:
-      "High-conversion digital platform engineered for a specialized furniture restoration business. Built to solve high-resolution image rendering bottlenecks and deliver direct mobile WhatsApp/Call leads.",
     image:
       "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1600&q=85",
-    imageAlt: "Carefully crafted furniture in a warm, contemporary interior",
-    stats: ["99/100 Lighthouse", "< 0.8s Load", "Mobile Lead Optimized"],
     detailsHref: "/work/restauracija-kelava",
     demoHref: "https://restauracijakelava.vercel.app",
+  },
+  {
+    id: "apex",
+    image:
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=85",
+    detailsHref: "/work/apex",
+    demoHref: "https://apex-estates-seven.vercel.app",
   },
 ] as const;
 
@@ -142,11 +134,12 @@ export function FeaturedWorkCarousel({ locale = "EN" }: { locale?: Locale }) {
               src={project.image}
               alt={copy.projects[project.id].imageAlt}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+              decoding="async"
+              className={`absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-[1.02] ${project.id === "cavaliero" ? "bg-[#101214] object-contain" : "object-cover"}`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/25 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-[#09090b]/35" />
             <div className="absolute inset-x-6 bottom-6 flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/75 sm:inset-x-8 sm:bottom-8">
-              <span>KRON / {project.id === "apex" ? "01" : "02"}</span>
+              <span>KRON / {String(activeIndex + 1).padStart(2, "0")}</span>
               <span className="h-px flex-1 bg-white/20" />
               <span>{copy.selectedWork}</span>
             </div>
@@ -159,7 +152,9 @@ export function FeaturedWorkCarousel({ locale = "EN" }: { locale?: Locale }) {
                   {copy.projects[project.id].badge}
                 </span>
                 <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/45 sm:text-xs">
-                  {activeIndex + 1} / {PROJECTS.length}
+                  {String(activeIndex + 1).padStart(2, "0")}
+                  {" / "}
+                  {String(PROJECTS.length).padStart(2, "0")}
                 </span>
               </div>
               <p className="whitespace-normal [word-break:keep-all] text-xs font-medium uppercase tracking-[0.2em] text-white/55">

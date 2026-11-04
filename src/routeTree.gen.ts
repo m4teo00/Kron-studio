@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WorkApexRouteImport } from './routes/work.apex'
+import { Route as WorkCavalieroRouteImport } from './routes/work.cavaliero'
 import { Route as WorkRestauracijaKelavaRouteImport } from './routes/work.restauracija-kelava'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const WorkApexRoute = WorkApexRouteImport.update({
   path: '/work/apex',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WorkCavalieroRoute = WorkCavalieroRouteImport.update({
+  id: '/work/cavaliero',
+  path: '/work/cavaliero',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkRestauracijaKelavaRoute = WorkRestauracijaKelavaRouteImport.update({
   id: '/work/restauracija-kelava',
   path: '/work/restauracija-kelava',
@@ -32,30 +38,40 @@ const WorkRestauracijaKelavaRoute = WorkRestauracijaKelavaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/work/apex': typeof WorkApexRoute
+  '/work/cavaliero': typeof WorkCavalieroRoute
   '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/work/apex': typeof WorkApexRoute
+  '/work/cavaliero': typeof WorkCavalieroRoute
   '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/work/apex': typeof WorkApexRoute
+  '/work/cavaliero': typeof WorkCavalieroRoute
   '/work/restauracija-kelava': typeof WorkRestauracijaKelavaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/work/apex' | '/work/restauracija-kelava'
+  fullPaths:
+    '/' | '/work/apex' | '/work/cavaliero' | '/work/restauracija-kelava'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/work/apex' | '/work/restauracija-kelava'
-  id: '__root__' | '/' | '/work/apex' | '/work/restauracija-kelava'
+  to: '/' | '/work/apex' | '/work/cavaliero' | '/work/restauracija-kelava'
+  id:
+    | '__root__'
+    | '/'
+    | '/work/apex'
+    | '/work/cavaliero'
+    | '/work/restauracija-kelava'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   WorkApexRoute: typeof WorkApexRoute
+  WorkCavalieroRoute: typeof WorkCavalieroRoute
   WorkRestauracijaKelavaRoute: typeof WorkRestauracijaKelavaRoute
 }
 
@@ -75,6 +91,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkApexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work/cavaliero': {
+      id: '/work/cavaliero'
+      path: '/work/cavaliero'
+      fullPath: '/work/cavaliero'
+      preLoaderRoute: typeof WorkCavalieroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/work/restauracija-kelava': {
       id: '/work/restauracija-kelava'
       path: '/work/restauracija-kelava'
@@ -88,6 +111,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   WorkApexRoute: WorkApexRoute,
+  WorkCavalieroRoute: WorkCavalieroRoute,
   WorkRestauracijaKelavaRoute: WorkRestauracijaKelavaRoute,
 }
 export const routeTree = rootRouteImport

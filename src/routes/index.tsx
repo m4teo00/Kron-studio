@@ -1,29 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X } from "lucide-react";
-import { motion, useAnimationControls } from "framer-motion";
+import { CalendarDays, Globe2, Megaphone, Menu, Workflow, X, type LucideIcon } from "lucide-react";
 import { FeaturedWorkCarousel } from "@/components/featured-work-carousel";
 import { scrollToContact } from "@/lib/contact-scroll";
 import { getSiteCopy, type Locale } from "@/lib/site-copy";
 
 const HOMEPAGE_SEO = {
   EN: {
-    title: "KRON — Formally Educated Web Design & Next.js Engineering",
+    title: "KRON Studio | Websites, Apps, Marketing & AI Solutions",
     description:
-      "Custom, high-performance Next.js websites built by a formally educated web designer. Lightning-fast load times, clean aesthetics, and zero latency.",
+      "KRON Studio creates modern websites, business applications, marketing campaigns and AI automation tailored to help your business grow.",
     language: "en",
   },
   HR: {
-    title: "KRON — Školovani Web Dizajn & Next.js Inženjerstvo",
+    title: "KRON Studio | Web-stranice, aplikacije, marketing i AI rješenja",
     description:
-      "Izrada brzih i čistih Next.js web stranica. Školovani web dizajner posvećen vrhunskoj estetici, brzini i besprijekornim performansama.",
+      "KRON Studio izrađuje moderne web-stranice, poslovne aplikacije, marketinške kampanje i AI automatizacije prilagođene rastu vašeg poslovanja.",
     language: "hr",
   },
 } as const;
 
 const OG_IMAGE_URL = "https://krondigital.com/og-image.png";
 const SITE_KEYWORDS =
-  "Next.js developer, web dizajn, izrada web stranica, UI/UX dizajn, high-performance websites, KRON digital studio";
+  "KRON Studio, web design, web development, business applications, digital marketing, AI automation, izrada web-stranica, poslovne aplikacije, digitalni marketing";
 
 export const Route = createFileRoute("/")({
   validateSearch: (search: Record<string, unknown>) => {
@@ -68,28 +67,11 @@ function updateMetaContent(attribute: "name" | "property", key: string, content:
 
 const NAV_HREFS = ["#systems", "#showcase", "#methodology", "#contact"] as const;
 
-const SERVICES = [
-  {
-    n: "01",
-    title: "Bespoke Web Architecture",
-    body: "Custom React / Next.js platforms built from scratch for lightning performance and conversion.",
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
-    span: "lg:col-span-2",
-  },
-  {
-    n: "02",
-    title: "Instagram Direct Response Systems",
-    body: "Always-on lead intake via DM & comments. Converts social engagement and story replies directly into structured client inquiries.",
-    img: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?auto=format&fit=crop&w=1000&q=80",
-    span: "",
-  },
-  {
-    n: "03",
-    title: "Visual Brand Identity",
-    body: "Complete luxury design systems, editorial typography, color theory and digital guidelines.",
-    img: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=1800&q=80",
-    span: "lg:col-span-3",
-  },
+const SERVICES: { number: string; icon: LucideIcon }[] = [
+  { number: "01", icon: Globe2 },
+  { number: "02", icon: CalendarDays },
+  { number: "03", icon: Megaphone },
+  { number: "04", icon: Workflow },
 ];
 
 function Reveal({
@@ -138,14 +120,36 @@ function Label({ children }: { children: ReactNode }) {
   );
 }
 
+function ServiceIllustration({ icon: Icon, number }: { icon: LucideIcon; number: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="flex aspect-[16/9] items-center justify-between overflow-hidden border-b border-border bg-gradient-to-br from-white/[0.045] via-transparent to-accent/[0.06] px-6 sm:px-8"
+    >
+      <div className="flex size-16 items-center justify-center rounded-2xl border border-accent/25 bg-accent/[0.08] text-accent transition-transform duration-500 group-hover:scale-105 sm:size-20">
+        <Icon className="size-7 sm:size-8" strokeWidth={1.5} />
+      </div>
+      <div className="flex w-1/2 flex-col gap-3 opacity-70">
+        <span className="text-[9px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+          KRON STUDIO / {number}
+        </span>
+        <span className="h-px w-full bg-border" />
+        <span className="flex gap-2">
+          <span className="h-1.5 w-2/5 rounded-full bg-accent/45" />
+          <span className="h-1.5 w-1/4 rounded-full bg-foreground/15" />
+        </span>
+        <span className="h-1.5 w-3/5 rounded-full bg-foreground/10" />
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   useReveal();
   const { lang } = Route.useSearch();
   const [open, setOpen] = useState(false);
   const [locale, setLocale] = useState<Locale>(lang ?? "EN");
   const copy = getSiteCopy(locale);
-  const localeFade = useAnimationControls();
-  const previousLocale = useRef(locale);
 
   useEffect(() => {
     const seo = HOMEPAGE_SEO[locale];
@@ -157,21 +161,23 @@ function Index() {
     updateMetaContent("property", "og:locale", locale === "HR" ? "hr_HR" : "en_US");
     updateMetaContent("name", "twitter:title", seo.title);
     updateMetaContent("name", "twitter:description", seo.description);
-
-    if (previousLocale.current !== locale) {
-      previousLocale.current = locale;
-      void localeFade.start({
-        opacity: [0.88, 1],
-        transition: { duration: 0.28, ease: "easeOut" },
-      });
-    }
-  }, [locale, localeFade]);
+  }, [locale]);
 
   return (
-    <motion.div
-      animate={localeFade}
-      className="relative min-h-screen overflow-x-hidden bg-background text-foreground"
-    >
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "KRON Studio",
+            url: "https://krondigital.com/",
+            logo: "https://krondigital.com/logo.png",
+            description: HOMEPAGE_SEO[locale].description,
+          }),
+        }}
+      />
       <div className="arch-grid pointer-events-none absolute inset-0 opacity-60" aria-hidden />
 
       {/* NAV */}
@@ -259,7 +265,7 @@ function Index() {
             </div>
           </Reveal>
           <Reveal delay={100}>
-            <h1 className="max-w-6xl whitespace-normal [word-break:keep-all] text-3xl font-black uppercase leading-[0.95] tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+            <h1 className="max-w-6xl whitespace-normal text-3xl font-black leading-[1.02] tracking-[-0.045em] sm:text-4xl md:text-5xl lg:text-6xl">
               {copy.hero.headline}
             </h1>
           </Reveal>
@@ -270,13 +276,19 @@ function Index() {
             <p className="text-lg leading-relaxed text-muted-foreground lg:col-span-6">
               {copy.hero.subtitle}
             </p>
-            <div className="flex items-end lg:col-span-6 lg:justify-end">
+            <div className="flex flex-wrap items-end gap-3 lg:col-span-6 lg:justify-end">
+              <a
+                href="#showcase"
+                className="inline-flex min-h-12 items-center justify-center gap-2 bg-accent px-5 text-sm font-semibold text-accent-foreground transition-colors hover:bg-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                {copy.hero.projectsCta}
+              </a>
               <a
                 href="#contact"
                 onClick={scrollToContact}
-                className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em]"
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-border px-5 text-sm font-semibold transition-colors hover:border-accent/60 hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
-                {copy.hero.cta}
+                {copy.hero.quoteCta}
               </a>
             </div>
           </Reveal>
@@ -291,38 +303,46 @@ function Index() {
                 {copy.services.heading}
               </h2>
             </Reveal>
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {copy.services.cards.map((card, i) => {
                 const service = SERVICES[i];
                 if (!service) return null;
+                const Icon = service.icon;
 
                 return (
-                  <Reveal key={service.n} delay={i * 120} className={service.span}>
-                    <article className="group h-full min-w-0 overflow-hidden border border-border bg-card transition-shadow duration-300 hover:shadow-gold">
-                      <div className="aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-72">
-                        <img
-                          src={service.img}
-                          alt={card.imageAlt}
-                          loading="lazy"
-                          className="h-full w-full object-cover opacity-80 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100"
-                        />
-                      </div>
-                      <div className="p-4 sm:p-6 md:p-9">
-                        <span className="font-display text-sm font-bold text-accent">
-                          {service.n}
+                  <Reveal key={service.number} delay={i * 90}>
+                    <article className="group h-full min-w-0 overflow-hidden border border-border bg-card transition-colors duration-300 hover:border-accent/35">
+                      <ServiceIllustration icon={Icon} number={service.number} />
+                      <div className="p-5 sm:p-6">
+                        <span className="font-display text-xs font-semibold tracking-[0.16em] text-accent">
+                          {service.number}
                         </span>
-                        <h3 className="mt-3 whitespace-normal [word-break:keep-all] text-2xl font-extrabold tracking-tight md:text-3xl">
+                        <h3 className="mt-3 text-xl font-bold tracking-tight md:text-2xl">
                           {card.title}
                         </h3>
-                        <p className="mt-4 max-w-xl whitespace-normal [word-break:keep-all] leading-relaxed text-muted-foreground">
-                          {card.body}
-                        </p>
+                        <p className="mt-3 leading-relaxed text-muted-foreground">{card.body}</p>
                       </div>
                     </article>
                   </Reveal>
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        <section className="border-t border-border bg-card/35">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 py-20 sm:px-6 md:grid-cols-12 md:items-end lg:px-8 md:py-28">
+            <Reveal className="md:col-span-7">
+              <Label>{copy.growth.badge}</Label>
+              <h2 className="max-w-4xl text-3xl font-black leading-[1.05] tracking-[-0.04em] sm:text-4xl md:text-5xl">
+                {copy.growth.heading}
+              </h2>
+            </Reveal>
+            <Reveal delay={120} className="md:col-span-5">
+              <p className="max-w-xl text-base leading-8 text-muted-foreground md:text-lg">
+                {copy.growth.body}
+              </p>
+            </Reveal>
           </div>
         </section>
 
@@ -337,6 +357,33 @@ function Index() {
             </Reveal>
             <Reveal>
               <FeaturedWorkCarousel locale={locale} />
+            </Reveal>
+            <Reveal delay={120}>
+              <div className="mt-16 border-t border-border pt-8">
+                <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">
+                      {copy.work.creativeTitle}
+                    </p>
+                    <h3 className="mt-2 text-2xl font-bold tracking-tight">
+                      {copy.work.comingSoon}
+                    </h3>
+                  </div>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {copy.work.concepts.map((concept, index) => (
+                    <div
+                      key={concept}
+                      className="flex min-h-20 items-center justify-between gap-4 border border-border bg-card/60 px-5 py-4"
+                    >
+                      <span className="text-sm font-medium">{concept}</span>
+                      <span className="font-display text-xs tracking-[0.2em] text-accent">
+                        0{index + 1}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </Reveal>
           </div>
         </section>
@@ -413,7 +460,7 @@ function Index() {
           </span>
         </div>
       </footer>
-    </motion.div>
+    </div>
   );
 }
 
@@ -573,10 +620,11 @@ function Inquiry({ locale }: { locale: Locale }) {
                   </label>
                   <input
                     id="f-contact"
-                    type="text"
+                    type="email"
                     name="email"
                     required
                     autoComplete="email"
+                    aria-required="true"
                     placeholder={copy.placeholders.contact}
                     className={input}
                   />
