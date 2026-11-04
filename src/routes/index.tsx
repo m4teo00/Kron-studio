@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CalendarDays, Globe2, Megaphone, Menu, Workflow, X, type LucideIcon } from "lucide-react";
 import { FeaturedWorkCarousel } from "@/components/featured-work-carousel";
+import { MarketingCampaignPreview } from "@/components/marketing-campaign-preview";
 import { scrollToContact } from "@/lib/contact-scroll";
 import { getSiteCopy, type Locale } from "@/lib/site-copy";
 
@@ -359,31 +360,7 @@ function Index() {
               <FeaturedWorkCarousel locale={locale} />
             </Reveal>
             <Reveal delay={120}>
-              <div className="mt-16 border-t border-border pt-8">
-                <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">
-                      {copy.work.creativeTitle}
-                    </p>
-                    <h3 className="mt-2 text-2xl font-bold tracking-tight">
-                      {copy.work.comingSoon}
-                    </h3>
-                  </div>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {copy.work.concepts.map((concept, index) => (
-                    <div
-                      key={concept}
-                      className="flex min-h-20 items-center justify-between gap-4 border border-border bg-card/60 px-5 py-4"
-                    >
-                      <span className="text-sm font-medium">{concept}</span>
-                      <span className="font-display text-xs tracking-[0.2em] text-accent">
-                        0{index + 1}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <MarketingCampaignPreview locale={locale} />
             </Reveal>
           </div>
         </section>

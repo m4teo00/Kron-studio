@@ -1,0 +1,195 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import type { Locale } from "@/lib/site-copy";
+
+const SEO = {
+  HR: {
+    title: "Svjetlo otkriva sve — marketinška kampanja | KRON Studio",
+    description: "Konceptualna kreativna kampanja za premium detailing. Pogledajte tri oglasa i naš pristup od prve ideje do vizualnog rješenja.",
+  },
+  EN: {
+    title: "Light Reveals Everything — marketing concept | KRON Studio",
+    description: "A conceptual premium automotive detailing campaign. Explore three advertising visuals and the thinking behind the creative direction.",
+  },
+} as const;
+
+export const Route = createFileRoute("/work/svjetlo-otkriva-sve")({
+  validateSearch: (search: Record<string, unknown>) => {
+    const lang = search["lang"];
+    return lang === "HR" || lang === "EN" ? { lang: lang as Locale } : {};
+  },
+  head: ({ match }) => {
+    const lang = match.search.lang === "HR" ? "HR" : "EN";
+    const seo = SEO[lang];
+    return {
+      meta: [
+        { title: seo.title },
+        { name: "description", content: seo.description },
+        { property: "og:title", content: seo.title },
+        { property: "og:description", content: seo.description },
+        { property: "og:type", content: "article" },
+        { property: "og:image", content: "https://kron-studio.vercel.app/marketing/detailing-01-" + lang.toLowerCase() + ".svg" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      links: [
+        { rel: "canonical", href: "https://kron-studio.vercel.app/work/svjetlo-otkriva-sve" },
+        { rel: "alternate", hrefLang: "hr", href: "https://kron-studio.vercel.app/work/svjetlo-otkriva-sve?lang=HR" },
+        { rel: "alternate", hrefLang: "en", href: "https://kron-studio.vercel.app/work/svjetlo-otkriva-sve?lang=EN" },
+      ],
+    };
+  },
+  component: MarketingCaseStudy,
+});
+
+const COPY = {
+  HR: {
+    back: "Natrag na projekte",
+    badge: "Kreativni radovi / Konceptualni projekt",
+    title: "SVJETLO OTKRIVA SVE.",
+    lead: "Marketinška kampanja za premium detailing, nastala iz stvarnog uvida u proces korekcije laka.",
+    galleryTitle: "Tri kadra. Jedna ideja.",
+    galleryLabel: "Oglasni vizuali",
+    gallery: ["Glavna poruka", "Proces i preciznost", "Završna obrada"],
+    conceptTitle: "Ideja koja proizlazi iz same usluge.",
+    story: [
+      "U oglašavanju automobilske njege često se ponavljaju iste poruke o sjaju i čistoći. Za ovaj koncept krenuli smo od konkretne radnje koju profesionalci koriste pri provjeri površine — promatranja laka pod kontroliranim svjetlom.",
+      "Uska linija svjetla otkriva ono što je pri običnom pogledu lako previdjeti. Taj je trenutak postao središte kampanje: od kratkog naslova do kontrasta, kompozicije i precizne tipografije.",
+      "Nastala su tri povezana vizuala. Prvi privlači pozornost, drugi naglašava disciplinu procesa, a treći stavlja fokus na završnu obradu.",
+    ],
+    deliverTitle: "Što smo izradili",
+    deliver: ["Kreativni koncept i slogan", "3 oglasa za društvene mreže", "Art direction i tekstovi", "Dvojezični portfolio prikaz"],
+    note: "Ovo je samostalna konceptualna kampanja, a ne projekt naručen od klijenta. Vizuali su stilizirane digitalne ilustracije; ne prikazuju rezultate stvarnog detailing tretmana.",
+    ctaTitle: "Vaš proizvod zaslužuje jasnu ideju.",
+    cta: "Razgovarajmo o kampanji",
+    close: "Zatvori pregled",
+    prev: "Prethodni vizual",
+    next: "Sljedeći vizual",
+  },
+  EN: {
+    back: "Back to projects",
+    badge: "Creative work / Concept project",
+    title: "LIGHT REVEALS EVERYTHING.",
+    lead: "A premium detailing campaign inspired by the real-world process of inspecting paintwork.",
+    galleryTitle: "Three frames. One idea.",
+    galleryLabel: "Advertising visuals",
+    gallery: ["The central message", "Process and precision", "The final finish"],
+    conceptTitle: "An idea rooted in the service itself.",
+    story: [
+      "Automotive detailing ads often rely on the same promises of shine and cleanliness. This concept starts with an action professionals actually use to assess the finish: examining paintwork under controlled light.",
+      "A narrow strip of light reveals what an everyday glance can miss. We built the campaign around that moment, from the concise headline to the contrast, composition and typography.",
+      "The outcome is a connected set of three visuals. One captures attention, the second communicates care in the process, and the third focuses on the finished surface.",
+    ],
+    deliverTitle: "Project deliverables",
+    deliver: ["Creative idea and campaign line", "3 social media advertisements", "Art direction and copywriting", "Bilingual portfolio presentation"],
+    note: "This is an independent concept campaign, not commissioned client work. Visuals are stylized digital illustrations and do not depict actual detailing results.",
+    ctaTitle: "Your product deserves a clear idea.",
+    cta: "Discuss a campaign",
+    close: "Close gallery",
+    prev: "Previous visual",
+    next: "Next visual",
+  },
+} as const;
+
+function MarketingCaseStudy() {
+  const search = Route.useSearch();
+  const lang: Locale = search.lang === "HR" ? "HR" : "EN";
+  const copy = COPY[lang];
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [active, setActive] = useState(0);
+  const images = [1, 2, 3].map((n) => "/marketing/detailing-0" + n + "-" + lang.toLowerCase() + ".svg");
+
+  useEffect(() => {
+    document.documentElement.lang = lang === "HR" ? "hr" : "en";
+  }, [lang]);
+
+  function open(i: number) {
+    setActive(i);
+    dialogRef.current?.showModal();
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLDialogElement>) {
+    if (event.key === "ArrowRight") { event.preventDefault(); setActive((v) => (v + 1) % 3); }
+    if (event.key === "ArrowLeft") { event.preventDefault(); setActive((v) => (v + 2) % 3); }
+  }
+
+  return (
+    <main lang={lang === "HR" ? "hr" : "en"} className="min-h-screen bg-[#080a0d] text-white">
+      <header className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-b border-white/10 px-4 py-5 sm:px-8">
+        <a href="/" className="text-lg font-black tracking-tight">KRON.</a>
+        <nav className="flex items-center gap-3 sm:gap-6">
+          <a className="hidden text-xs text-white/60 transition-colors hover:text-white sm:inline" href={"/?lang=" + lang + "#showcase"}>{copy.back}</a>
+          <div className="flex gap-1 rounded-full border border-white/15 p-1 text-xs" aria-label="Language">
+            {(["HR", "EN"] as const).map((l) => (
+              <a key={l} href={"/work/svjetlo-otkriva-sve?lang=" + l}
+                aria-current={l === lang ? "page" : undefined}
+                className={"rounded-full px-3 py-1.5 font-semibold " + (l === lang ? "bg-white text-black" : "text-white/60 hover:text-white")}>{l}</a>
+            ))}
+          </div>
+        </nav>
+      </header>
+
+      <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-14 sm:px-8 md:grid-cols-2 md:py-24">
+        <div>
+          <p className="mb-5 text-xs font-semibold uppercase tracking-[0.19em] text-accent">{copy.badge}</p>
+          <h1 className="max-w-2xl text-5xl font-black uppercase leading-[.99] tracking-[-0.055em] sm:text-6xl lg:text-7xl">{copy.title}</h1>
+          <p className="mt-8 max-w-xl text-base leading-8 text-white/65 sm:text-lg">{copy.lead}</p>
+          <a href="#gallery" className="mt-9 inline-flex min-h-12 items-center gap-2 rounded-full border border-white/20 px-6 text-sm font-semibold transition-colors hover:border-accent hover:text-accent">{copy.galleryTitle}<ArrowUpRight size={17}/></a>
+        </div>
+        <div className="overflow-hidden rounded-xl border border-white/10 bg-[#11151a]">
+          <img src={images[0]} alt={copy.gallery[0]} width="1080" height="1350" className="aspect-[4/5] w-full object-cover" fetchPriority="high"/>
+        </div>
+      </section>
+
+      <section id="gallery" className="border-t border-white/10 py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+            <h2 className="text-3xl font-bold tracking-[-0.04em] sm:text-5xl">{copy.galleryTitle}</h2>
+            <span className="text-xs uppercase tracking-[0.18em] text-white/50">{copy.galleryLabel} / 01—03</span>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-3">
+            {images.map((src, i) => (
+              <button key={src} type="button" onClick={() => open(i)} className="group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] text-left transition-all hover:-translate-y-1 hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+                <img src={src} alt={copy.gallery[i]} width="1080" height="1350" loading="lazy" decoding="async" className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"/>
+                <div className="flex items-center justify-between gap-4 p-5 text-sm"><span>{String(i + 1).padStart(2,"0")} / {copy.gallery[i]}</span><ArrowUpRight size={18} aria-hidden="true"/></div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 py-16 sm:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-8 md:grid-cols-[.4fr_.6fr]">
+          <h2 className="max-w-md text-3xl font-bold leading-tight tracking-[-0.04em] sm:text-4xl">{copy.conceptTitle}</h2>
+          <div className="max-w-2xl">
+            {copy.story.map((p) => <p key={p} className="mb-6 text-base leading-8 text-white/65">{p}</p>)}
+            <h3 className="mt-10 text-lg font-semibold">{copy.deliverTitle}</h3>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">{copy.deliver.map((item) => <li key={item} className="border-b border-white/10 pb-3 text-sm text-white/80">{item}</li>)}</ul>
+            <p className="mt-10 text-xs leading-6 text-white/40">{copy.note}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 px-4 py-20 text-center sm:px-8">
+        <h2 className="mx-auto max-w-2xl text-3xl font-semibold tracking-[-0.04em] sm:text-5xl">{copy.ctaTitle}</h2>
+        <a href={"/?lang=" + lang + "#contact"} className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-7 text-sm font-semibold text-black transition-colors hover:bg-accent">{copy.cta}<ArrowUpRight size={17}/></a>
+      </section>
+
+      <dialog ref={dialogRef} onKeyDown={handleKeyDown} onClick={(event) => { if (event.target === dialogRef.current) dialogRef.current?.close(); }}
+        aria-label={copy.gallery[active]} className="fixed inset-0 m-auto max-h-[95vh] w-[min(94vw,780px)] max-w-none overflow-hidden rounded-xl border border-white/20 bg-[#07090b] p-0 text-white shadow-2xl backdrop:bg-black/90">
+        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70">{String(active + 1).padStart(2,"0")} / 03 · {copy.gallery[active]}</span>
+          <button type="button" onClick={() => dialogRef.current?.close()} aria-label={copy.close} className="rounded-full p-2 hover:bg-white/10"><X size={20}/></button>
+        </div>
+        <div className="flex max-h-[calc(95vh-132px)] items-center justify-center overflow-auto bg-[#07090b]">
+          <img src={images[active]} alt={copy.gallery[active]} width="1080" height="1350" className="mx-auto max-h-[calc(95vh-132px)] w-auto max-w-full object-contain"/>
+        </div>
+        <div className="flex items-center justify-between border-t border-white/10 px-4 py-2">
+          <button type="button" onClick={() => setActive((a) => (a + 2) % 3)} aria-label={copy.prev} className="rounded-full p-2 hover:bg-white/10"><ArrowLeft size={20}/></button>
+          <span className="text-xs text-white/50">{String(active + 1).padStart(2,"0")} / 03</span>
+          <button type="button" onClick={() => setActive((a) => (a + 1) % 3)} aria-label={copy.next} className="rounded-full p-2 hover:bg-white/10"><ArrowRight size={20}/></button>
+        </div>
+      </dialog>
+    </main>
+  );
+}
