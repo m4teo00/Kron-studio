@@ -19,7 +19,7 @@ const ADS = {
     {
       headline: "VIDITE TRAGOVE\nNA LAKU?",
       kicker: "ZAPOČNITE PREGLEDOM",
-      body: "Dogovorite pregled vozila i saznajte koje su mogućnosti obrade.",
+      body: "Dogovorite pregled i saznajte što vašem laku treba.",
       action: "DOGOVORITE PREGLED",
       alt: "Konceptualni oglas: fotografija automobila i poziv na procjenu",
     },
@@ -42,7 +42,7 @@ const ADS = {
     {
       headline: "SEEING MARKS\nIN YOUR PAINT?",
       kicker: "START WITH AN INSPECTION",
-      body: "Book an inspection to understand the options for your vehicle's finish.",
+      body: "Book an inspection to explore the right next step.",
       action: "BOOK AN INSPECTION",
       alt: "Concept advert: car finish and assessment call to action",
     },
@@ -91,7 +91,7 @@ export function MarketingCampaignPhoto({
     >
       <div className={"absolute left-[6%] right-[6%] top-[3%] z-20 flex items-center justify-between border-b pb-[2.8%] " + (index === 0 ? "border-white/35 text-[#f6f7f0]" : "border-[#1a201e]/25 text-[#202724]")}>
         <span className="font-semibold uppercase tracking-[.14em]" style={{ fontSize: "2.1cqw", lineHeight: 1.2 }}>{campaignName[locale]}</span>
-        <span className="h-[2.2cqw] w-[2.2cqw] rounded-full bg-[#c6f36d]" aria-hidden="true" />
+        <span className="font-mono tracking-[.08em] opacity-55" style={{fontSize:"2.1cqw"}}>0{index + 1} / 03</span>
       </div>
       <div className={"absolute left-[6%] top-[9%] z-20 font-mono tracking-[.12em] " + (index === 0 ? "text-white/60" : "text-[#5a655c]")} style={{ fontSize: "1.8cqw" }}>
         {(isHR ? "KAMPANJA" : "CAMPAIGN") + "  /  0" + (index + 1) + "—03"}
@@ -100,7 +100,7 @@ export function MarketingCampaignPhoto({
         <ImagePanel index={0} className="inset-x-0 top-[31%] bottom-[24%]" />
         <div className="absolute inset-x-0 top-[31%] bottom-[24%] bg-gradient-to-b from-[#0a1112] via-transparent to-transparent" aria-hidden="true" />
         <h3 className="absolute left-[6%] right-[6%] top-[15%] z-20 whitespace-pre-line font-black uppercase tracking-[-.065em] text-[#f6f7f0]" style={{ fontSize: "11.8cqw", lineHeight: .96 }}>{ad.headline}</h3>
-        <div className="absolute left-[6%] top-[30%] z-20 h-[.9cqw] w-[20%] bg-[#c6f36d]" aria-hidden="true"/>
+
         <div className="absolute bottom-0 left-0 right-0 h-[24%] bg-[#eae9e3] px-[6%] pt-[4%] text-[#19211e]">
           <p className="font-semibold uppercase tracking-[.13em] text-[#667066]" style={{ fontSize: "2.3cqw" }}>{ad.kicker}</p>
           <p className="mt-[3%] font-medium leading-[1.36]" style={{ fontSize: "3.5cqw" }}>{ad.body}</p>
@@ -134,16 +134,19 @@ export function MarketingCampaignPhoto({
         </div>
       </>}
       {index === 2 && <>
-        <h3 className="absolute left-[6%] right-[6%] top-[16%] z-10 whitespace-pre-line font-black uppercase tracking-[-.06em] text-[#151d19]" style={{ fontSize: "11.7cqw", lineHeight: .98 }}>{ad.headline}</h3>
-        <div className="absolute left-[6%] top-[37%] h-[.7cqw] w-[25%] bg-[#151d19]" />
-        <p className="absolute left-[6%] top-[41%] font-semibold uppercase tracking-[.14em] text-[#6e756d]" style={{ fontSize: "2.1cqw" }}>{ad.kicker}</p>
-        <ImagePanel index={2} className="inset-x-0 top-[48%] bottom-[14%]"/>
-        <div className="absolute bottom-[14%] left-0 right-0 top-[48%] border-t border-[#555d56]" aria-hidden="true">
-          <div className="absolute left-[6%] right-[6%] top-[12%] h-[.22cqw] bg-[#c6f36d]" />
+        {/* Dedicated headline area; nothing overlaps the CTA. */}
+        <div className="absolute inset-x-0 top-[14%] flex h-[28%] flex-col justify-start gap-[8%] px-[6%] text-[#151d19]">
+          <h3 className="whitespace-pre-line font-black uppercase tracking-[-.045em]" style={{ fontSize: "8.8cqw", lineHeight: 1.02 }}>{ad.headline}</h3>
+          <p className="font-semibold uppercase tracking-[.13em] text-[#6e756d]" style={{ fontSize: "2.2cqw" }}>{ad.kicker}</p>
         </div>
-        <div className="absolute inset-x-0 bottom-0 flex h-[14%] items-center justify-between gap-[3%] bg-[#c6f36d] px-[6%] text-[#142018]">
-          <p className="w-[56%] font-medium leading-[1.28]" style={{ fontSize: "2.8cqw" }}>{ad.body}</p>
-          <span className="inline-flex min-h-[48%] w-[40%] items-center justify-between gap-[2%] border border-[#253428] px-[4%] py-[3%] font-bold uppercase leading-[1.15]" style={{ fontSize: "2.6cqw" }}>{ad.action}<span style={{fontSize:"3.3cqw"}}>↗</span></span>
+        <ImagePanel index={2} className="inset-x-0 top-[43%] bottom-[21%]" />
+        {/* Fixed footer area with separate copy and action, using a vertical stack. */}
+        <div className="absolute inset-x-0 bottom-0 flex h-[21%] flex-col justify-between bg-[#eae9e3] px-[6%] py-[3.5%] text-[#142018]">
+          <p className="font-medium leading-[1.23]" style={{ fontSize: "3.1cqw" }}>{ad.body}</p>
+          <div className="flex items-center justify-between gap-[4%] border-t border-[#777f76] pt-[3%]">
+            <span className="font-bold uppercase tracking-[.03em]" style={{ fontSize: "3.05cqw" }}>{ad.action}</span>
+            <span aria-hidden="true" style={{ fontSize: "4.4cqw" }}>↗</span>
+          </div>
         </div>
       </>}
     </div>
