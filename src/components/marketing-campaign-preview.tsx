@@ -8,7 +8,7 @@ const COPY = {
     text: "Kampanja za premium njegu automobila, izgrađena oko jednog prepoznatljivog trenutka — provjere završne obrade pod kontroliranim svjetlom.",
     action: "Istražite kampanju",
     note: "Kreativni koncept · 3 oglasna vizuala",
-    alt: "Konceptualni oglas za premium detailing s minimalističkom ilustracijom automobila",
+    alt: "Fotografija crnog automobila u studiju, vizual konceptualne kampanje",
   },
   EN: {
     eyebrow: "Creative work / Concept campaign",
@@ -16,7 +16,7 @@ const COPY = {
     text: "A premium automotive detailing concept built around one unmistakable moment — inspecting the finish under controlled light.",
     action: "Explore the campaign",
     note: "Creative concept · 3 advertising visuals",
-    alt: "Premium detailing concept advert featuring a minimalist automotive illustration",
+    alt: "Photograph of a black car in a studio for a conceptual campaign",
   },
 } as const;
 
@@ -33,7 +33,7 @@ export function MarketingCampaignPreview({ locale }: { locale: Locale }) {
       >
         <div className="relative min-h-[300px] overflow-hidden bg-[#090d11] sm:min-h-[400px]">
           <img
-            src={locale === "HR" ? "/marketing/detailing-01-hr.svg" : "/marketing/detailing-01-en.svg"}
+            src="https://images.pexels.com/photos/6969032/pexels-photo-6969032.jpeg?auto=compress&cs=tinysrgb&w=1400"
             alt={c.alt}
             loading="lazy"
             decoding="async"
@@ -41,7 +41,7 @@ export function MarketingCampaignPreview({ locale }: { locale: Locale }) {
             height={1350}
             className="absolute inset-0 h-full w-full object-cover object-[center_38%] transition-transform duration-700 group-hover:scale-[1.025]"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07090c]/35 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07090c]/60 via-transparent to-black/35" />
         </div>
         <div className="flex flex-col justify-center px-6 py-12 sm:px-9 lg:px-14">
           <span className="mb-6 inline-flex w-fit rounded-full border border-accent/35 bg-accent/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent">
