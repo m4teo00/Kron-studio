@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/lib/site-copy";
+import { MarketingCampaignPhoto } from "@/components/marketing-campaign-photo";
 
 const SEO = {
   HR: {
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/work/svjetlo-otkriva-sve")({
         { property: "og:title", content: seo.title },
         { property: "og:description", content: seo.description },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: "https://images.pexels.com/photos/6969032/pexels-photo-6969032.jpeg?auto=compress&cs=tinysrgb&w=1400" },
+        { property: "og:image", content: "https://kron-studio.vercel.app/og-image.png" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [
@@ -48,7 +49,7 @@ const COPY = {
     badge: "Kreativni radovi / Konceptualni projekt",
     title: "SVJETLO OTKRIVA SVE.",
     lead: "Koncept kampanje za premium detailing studio. Tri kadra prate ono što profesionalna korekcija laka podrazumijeva: pregled, obradu i završnu provjeru.",
-    galleryTitle: "Tri kadra. Jedna ideja.",
+    galleryTitle: "Jedna ideja. Tri precizna kadra.",
     galleryLabel: "Oglasni vizuali",
     gallery: ["Pregled laka", "Korekcija laka", "Završna provjera"],
     posterTitles: ["SVJETLO OTKRIVA SVE.", "KOREKCIJA LAKA.", "ZAVRŠNA PROVJERA."],
@@ -73,7 +74,7 @@ const COPY = {
     badge: "Creative work / Concept project",
     title: "LIGHT REVEALS EVERYTHING.",
     lead: "A premium detailing campaign concept. Three connected frames follow the process: inspection, correction and final quality control.",
-    galleryTitle: "Three frames. One idea.",
+    galleryTitle: "One idea. Three precise frames.",
     galleryLabel: "Advertising visuals",
     gallery: ["Paint inspection", "Paint correction", "Final inspection"],
     posterTitles: ["LIGHT REVEALS EVERYTHING.", "PAINT CORRECTION.", "FINAL INSPECTION."],
@@ -101,11 +102,7 @@ function MarketingCaseStudy() {
   const copy = COPY[lang];
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState(0);
-  const images = [
-    "https://images.pexels.com/photos/6969032/pexels-photo-6969032.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    "https://images.pexels.com/photos/35149474/pexels-photo-35149474.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    "https://images.pexels.com/photos/35149476/pexels-photo-35149476.jpeg?auto=compress&cs=tinysrgb&w=1400"
-];
+  const steps = [0, 1, 2] as const;
 
   useEffect(() => {
     document.documentElement.lang = lang === "HR" ? "hr" : "en";
@@ -144,9 +141,7 @@ function MarketingCaseStudy() {
           <p className="mt-8 max-w-xl text-base leading-8 text-white/65 sm:text-lg">{copy.lead}</p>
           <a href="#gallery" className="mt-9 inline-flex min-h-12 items-center gap-2 rounded-full border border-white/20 px-6 text-sm font-semibold transition-colors hover:border-accent hover:text-accent">{copy.galleryTitle}<ArrowUpRight size={17}/></a>
         </div>
-        <div className="overflow-hidden rounded-xl border border-white/10 bg-[#11151a]">
-          <img src={images[0]} alt={copy.gallery[0]} width="1080" height="1350" className="aspect-[4/5] w-full object-cover" fetchPriority="high"/>
-        </div>
+        <MarketingCampaignPhoto index={0} locale={lang} eager className="rounded-xl border border-white/10" />
       </section>
 
       <section id="gallery" className="border-t border-white/10 py-16 sm:py-24">
@@ -156,14 +151,18 @@ function MarketingCaseStudy() {
             <span className="text-xs uppercase tracking-[0.18em] text-white/50">{copy.galleryLabel} / 01—03</span>
           </div>
           <div className="grid gap-5 sm:grid-cols-3">
-            {images.map((src, i) => (
-              <button key={src} type="button" onClick={() => open(i)} className="group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] text-left transition-all hover:-translate-y-1 hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#090d11]">
-                  <img src={src} alt={copy.gallery[i]} width="1080" height="1350" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"/>
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070a0d]/85 via-transparent to-[#070a0d]/40"/>
-                  <div className="pointer-events-none absolute inset-x-0 top-0 px-6 pt-8"><span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/70">0{i + 1} / 03</span><p className="max-w-[90%] text-2xl font-black uppercase leading-tight tracking-[-.035em] text-white sm:text-xl lg:text-3xl">{copy.posterTitles[i]}</p><p className="mt-3 max-w-[90%] text-xs leading-5 text-white/75">{copy.posterSubtitles[i]}</p></div>
+            {steps.map((index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => open(index)}
+                className="group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] text-left transition-all hover:-translate-y-1 hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <MarketingCampaignPhoto index={index} locale={lang} className="w-full transition-transform duration-500 group-hover:scale-[1.015]" />
+                <div className="flex items-center justify-between gap-4 p-5 text-sm">
+                  <span>{String(index + 1).padStart(2, "0")} / {copy.gallery[index]}</span>
+                  <ArrowUpRight size={18} aria-hidden="true" />
                 </div>
-                <div className="flex items-center justify-between gap-4 p-5 text-sm"><span>{String(i + 1).padStart(2,"0")} / {copy.gallery[i]}</span><ArrowUpRight size={18} aria-hidden="true"/></div>
               </button>
             ))}
           </div>
@@ -194,11 +193,11 @@ function MarketingCaseStudy() {
           <button type="button" onClick={() => dialogRef.current?.close()} aria-label={copy.close} className="rounded-full p-2 hover:bg-white/10"><X size={20}/></button>
         </div>
         <div className="flex max-h-[calc(95vh-132px)] items-center justify-center overflow-auto bg-[#07090b]">
-          <div className="relative mx-auto w-full max-w-[560px] overflow-hidden">
-            <img src={images[active]} alt={copy.gallery[active]} width="1080" height="1350" className="mx-auto max-h-[calc(95vh-132px)] w-full object-cover"/>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/75 via-transparent to-black/35" />
-            <div className="pointer-events-none absolute left-[7%] right-[7%] top-[7%]"><span className="mb-4 block text-xs font-semibold uppercase tracking-[0.24em] text-white/70">0{active + 1} / 03</span><h3 className="max-w-[92%] text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">{copy.posterTitles[active]}</h3><p className="mt-4 max-w-[80%] text-sm text-white/75">{copy.posterSubtitles[active]}</p></div>
-          </div>
+          <MarketingCampaignPhoto
+            index={active as 0 | 1 | 2}
+            locale={lang}
+            className="mx-auto w-[min(100%,60vh)] max-w-[560px]"
+          />
         </div>
         <div className="flex items-center justify-between border-t border-white/10 px-4 py-2">
           <button type="button" onClick={() => setActive((a) => (a + 2) % 3)} aria-label={copy.prev} className="rounded-full p-2 hover:bg-white/10"><ArrowLeft size={20}/></button>
