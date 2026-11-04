@@ -61,7 +61,7 @@ const COPY = {
     ],
     deliverTitle: "Što smo izradili",
     deliver: ["Kreativni koncept i slogan", "3 oglasa za društvene mreže", "Art direction i tekstovi", "Dvojezični portfolio prikaz"],
-    note: "Samostalni kreativni koncept, nije projekt stvarnog klijenta. Fotografije su referentni materijali s platforme Pexels; ne predstavljaju stvarne rezultate obrade niti suradnju s prikazanim automobilskim brendovima.",
+    note: "Samostalni kreativni koncept, a ne projekt stvarnog klijenta. Fotografije su referentni materijali s platforme Pexels, uključujući radove autora Meliha Cana; ne predstavljaju stvarne rezultate obrade niti suradnju s automobilskim brendovima.",
     ctaTitle: "Vaš proizvod zaslužuje jasnu ideju.",
     cta: "Razgovarajmo o kampanji",
     close: "Zatvori pregled",
@@ -86,7 +86,7 @@ const COPY = {
     ],
     deliverTitle: "Project deliverables",
     deliver: ["Creative idea and campaign line", "3 social media advertisements", "Art direction and copywriting", "Bilingual portfolio presentation"],
-    note: "Independent creative concept, not commissioned client work. Pexels photography is used as reference material. These images do not depict actual detailing results or imply automotive brand partnerships.",
+    note: "Independent creative concept, not commissioned client work. Reference photography is from Pexels, including work by Melih Can. The images do not show actual detailing results or imply automotive brand partnerships.",
     ctaTitle: "Your product deserves a clear idea.",
     cta: "Discuss a campaign",
     close: "Close gallery",
@@ -103,8 +103,8 @@ function MarketingCaseStudy() {
   const [active, setActive] = useState(0);
   const images = [
     "https://images.pexels.com/photos/6969032/pexels-photo-6969032.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    "https://images.pexels.com/photos/6872572/pexels-photo-6872572.jpeg?auto=compress&cs=tinysrgb&w=1400",
-    "https://images.pexels.com/photos/28921496/pexels-photo-28921496.jpeg?auto=compress&cs=tinysrgb&w=1400"
+    "https://images.pexels.com/photos/35149474/pexels-photo-35149474.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "https://images.pexels.com/photos/35149476/pexels-photo-35149476.jpeg?auto=compress&cs=tinysrgb&w=1400"
 ];
 
   useEffect(() => {
