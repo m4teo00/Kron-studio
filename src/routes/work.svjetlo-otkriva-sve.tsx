@@ -47,7 +47,7 @@ const COPY = {
     back: "Natrag na projekte",
     badge: "Kreativni radovi / Konceptualni projekt",
     title: "SVJETLO OTKRIVA SVE.",
-    lead: "Koncept kampanje za premium detailing studio. Tri kadra prate ono što profesionalna korekcija laka podrazumijeva: pregled, obradu i završnu provjeru."
+    lead: "Koncept kampanje za premium detailing studio. Tri kadra prate ono što profesionalna korekcija laka podrazumijeva: pregled, obradu i završnu provjeru.",
     galleryTitle: "Tri kadra. Jedna ideja.",
     galleryLabel: "Oglasni vizuali",
     gallery: ["Pregled laka", "Korekcija laka", "Završna provjera"],
@@ -72,7 +72,7 @@ const COPY = {
     back: "Back to projects",
     badge: "Creative work / Concept project",
     title: "LIGHT REVEALS EVERYTHING.",
-    lead: "A premium detailing campaign concept. Three connected frames follow the process: inspection, correction and final quality control."
+    lead: "A premium detailing campaign concept. Three connected frames follow the process: inspection, correction and final quality control.",
     galleryTitle: "Three frames. One idea.",
     galleryLabel: "Advertising visuals",
     gallery: ["Paint inspection", "Paint correction", "Final inspection"],
