@@ -29,7 +29,7 @@ export const Route = createFileRoute("/work/svjetlo-otkriva-sve")({
         { property: "og:title", content: seo.title },
         { property: "og:description", content: seo.description },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: "https://kron-studio.vercel.app/marketing/detailing-01-" + lang.toLowerCase() + ".svg" },
+        { property: "og:image", content: "https://images.pexels.com/photos/6969032/pexels-photo-6969032.jpeg?auto=compress&cs=tinysrgb&w=1400" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [
@@ -51,6 +51,7 @@ const COPY = {
     galleryTitle: "Tri kadra. Jedna ideja.",
     galleryLabel: "Oglasni vizuali",
     gallery: ["Glavna poruka", "Proces i preciznost", "Završna obrada"],
+    posterTitles: ["SVJETLO OTKRIVA SVE.", "NEMA MJESTA PREČACIMA.", "ZAŠTITA KOJA SE VIDI."],
     conceptTitle: "Ideja koja proizlazi iz same usluge.",
     story: [
       "U oglašavanju automobilske njege često se ponavljaju iste poruke o sjaju i čistoći. Za ovaj koncept krenuli smo od konkretne radnje koju profesionalci koriste pri provjeri površine — promatranja laka pod kontroliranim svjetlom.",
@@ -59,7 +60,7 @@ const COPY = {
     ],
     deliverTitle: "Što smo izradili",
     deliver: ["Kreativni koncept i slogan", "3 oglasa za društvene mreže", "Art direction i tekstovi", "Dvojezični portfolio prikaz"],
-    note: "Ovo je samostalna konceptualna kampanja, a ne projekt naručen od klijenta. Vizuali su stilizirane digitalne ilustracije; ne prikazuju rezultate stvarnog detailing tretmana.",
+    note: "Ovo je samostalna konceptualna kampanja, a ne projekt naručen od klijenta. Korištene su fotografije s platforme Pexels (Jae Park, Tima Miroshnichenko, Erik Mclean). Ovo nije prikaz rezultata stvarnog tretmana niti suradnja s prikazanim automobilskim brendovima.",
     ctaTitle: "Vaš proizvod zaslužuje jasnu ideju.",
     cta: "Razgovarajmo o kampanji",
     close: "Zatvori pregled",
@@ -74,6 +75,7 @@ const COPY = {
     galleryTitle: "Three frames. One idea.",
     galleryLabel: "Advertising visuals",
     gallery: ["The central message", "Process and precision", "The final finish"],
+    posterTitles: ["LIGHT REVEALS EVERYTHING.", "NO ROOM FOR SHORTCUTS.", "PROTECTION YOU CAN SEE."],
     conceptTitle: "An idea rooted in the service itself.",
     story: [
       "Automotive detailing ads often rely on the same promises of shine and cleanliness. This concept starts with an action professionals actually use to assess the finish: examining paintwork under controlled light.",
@@ -82,7 +84,7 @@ const COPY = {
     ],
     deliverTitle: "Project deliverables",
     deliver: ["Creative idea and campaign line", "3 social media advertisements", "Art direction and copywriting", "Bilingual portfolio presentation"],
-    note: "This is an independent concept campaign, not commissioned client work. Visuals are stylized digital illustrations and do not depict actual detailing results.",
+    note: "This is an independent concept campaign, not commissioned client work. Photography sourced from Pexels (Jae Park, Tima Miroshnichenko, Erik Mclean). These visuals do not depict actual detailing results or any partnership with the automotive brands shown.",
     ctaTitle: "Your product deserves a clear idea.",
     cta: "Discuss a campaign",
     close: "Close gallery",
@@ -97,7 +99,11 @@ function MarketingCaseStudy() {
   const copy = COPY[lang];
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [active, setActive] = useState(0);
-  const images = [1, 2, 3].map((n) => "/marketing/detailing-0" + n + "-" + lang.toLowerCase() + ".svg");
+  const images = [
+    "https://images.pexels.com/photos/6969032/pexels-photo-6969032.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "https://images.pexels.com/photos/6872572/pexels-photo-6872572.jpeg?auto=compress&cs=tinysrgb&w=1400",
+    "https://images.pexels.com/photos/28921496/pexels-photo-28921496.jpeg?auto=compress&cs=tinysrgb&w=1400"
+];
 
   useEffect(() => {
     document.documentElement.lang = lang === "HR" ? "hr" : "en";
@@ -150,7 +156,11 @@ function MarketingCaseStudy() {
           <div className="grid gap-5 sm:grid-cols-3">
             {images.map((src, i) => (
               <button key={src} type="button" onClick={() => open(i)} className="group overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] text-left transition-all hover:-translate-y-1 hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
-                <img src={src} alt={copy.gallery[i]} width="1080" height="1350" loading="lazy" decoding="async" className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"/>
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#090d11]">
+                  <img src={src} alt={copy.gallery[i]} width="1080" height="1350" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"/>
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070a0d]/85 via-transparent to-[#070a0d]/40"/>
+                  <p className="pointer-events-none absolute left-5 right-5 top-7 max-w-[85%] text-2xl font-black uppercase leading-tight tracking-[-.035em] text-white sm:text-xl lg:text-3xl">{copy.posterTitles[i]}</p>
+                </div>
                 <div className="flex items-center justify-between gap-4 p-5 text-sm"><span>{String(i + 1).padStart(2,"0")} / {copy.gallery[i]}</span><ArrowUpRight size={18} aria-hidden="true"/></div>
               </button>
             ))}
@@ -182,7 +192,11 @@ function MarketingCaseStudy() {
           <button type="button" onClick={() => dialogRef.current?.close()} aria-label={copy.close} className="rounded-full p-2 hover:bg-white/10"><X size={20}/></button>
         </div>
         <div className="flex max-h-[calc(95vh-132px)] items-center justify-center overflow-auto bg-[#07090b]">
-          <img src={images[active]} alt={copy.gallery[active]} width="1080" height="1350" className="mx-auto max-h-[calc(95vh-132px)] w-auto max-w-full object-contain"/>
+          <div className="relative mx-auto w-full max-w-[560px] overflow-hidden">
+            <img src={images[active]} alt={copy.gallery[active]} width="1080" height="1350" className="mx-auto max-h-[calc(95vh-132px)] w-full object-cover"/>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/75 via-transparent to-black/35" />
+            <h3 className="pointer-events-none absolute left-[7%] right-[7%] top-[7%] text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">{copy.posterTitles[active]}</h3>
+          </div>
         </div>
         <div className="flex items-center justify-between border-t border-white/10 px-4 py-2">
           <button type="button" onClick={() => setActive((a) => (a + 2) % 3)} aria-label={copy.prev} className="rounded-full p-2 hover:bg-white/10"><ArrowLeft size={20}/></button>
