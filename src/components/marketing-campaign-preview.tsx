@@ -1,5 +1,6 @@
 import type { Locale } from "@/lib/site-copy";
 import { ArrowUpRight } from "lucide-react";
+import { MarketingCampaignPhoto } from "@/components/marketing-campaign-photo";
 
 const COPY = {
   HR: {
@@ -8,7 +9,7 @@ const COPY = {
     text: "Kampanja za premium njegu automobila, izgrađena oko jednog prepoznatljivog trenutka — provjere završne obrade pod kontroliranim svjetlom.",
     action: "Istražite kampanju",
     note: "Kreativni koncept · 3 oglasna vizuala",
-    alt: "Fotografija crnog automobila u studiju, vizual konceptualne kampanje",
+    alt: "Konceptualna kampanja za premium detailing",
   },
   EN: {
     eyebrow: "Creative work / Concept campaign",
@@ -16,7 +17,7 @@ const COPY = {
     text: "A premium automotive detailing concept built around one unmistakable moment — inspecting the finish under controlled light.",
     action: "Explore the campaign",
     note: "Creative concept · 3 advertising visuals",
-    alt: "Photograph of a black car in a studio for a conceptual campaign",
+    alt: "Premium automotive detailing concept campaign",
   },
 } as const;
 
@@ -32,16 +33,7 @@ export function MarketingCampaignPreview({ locale }: { locale: Locale }) {
         className="group grid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025] transition-all duration-300 hover:border-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent md:grid-cols-[0.42fr_0.58fr]"
       >
         <div className="relative min-h-[300px] overflow-hidden bg-[#090d11] sm:min-h-[400px]">
-          <img
-            src="https://images.pexels.com/photos/6969032/pexels-photo-6969032.jpeg?auto=compress&cs=tinysrgb&w=1400"
-            alt={c.alt}
-            loading="lazy"
-            decoding="async"
-            width={1080}
-            height={1350}
-            className="absolute inset-0 h-full w-full object-cover object-[center_38%] transition-transform duration-700 group-hover:scale-[1.025]"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07090c]/60 via-transparent to-black/35" />
+          <MarketingCampaignPhoto index={0} locale={locale} className="absolute inset-0 !aspect-auto transition-transform duration-700 group-hover:scale-[1.025]" />
         </div>
         <div className="flex flex-col justify-center px-6 py-12 sm:px-9 lg:px-14">
           <span className="mb-6 inline-flex w-fit rounded-full border border-accent/35 bg-accent/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-accent">
