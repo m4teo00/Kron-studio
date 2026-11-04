@@ -52,21 +52,21 @@ export function MarketingCampaignPhoto({
   return (
     <div className={`relative aspect-[4/5] overflow-hidden bg-[#080b0e] ${className}`}>
       <img
-        src="/marketing/detailing-story.svg"
+        src={locale === "HR" ? "/marketing/premium-posters-hr.svg" : "/marketing/detailing-story.svg"}
         alt={copy.alt}
         loading={eager ? "eager" : "lazy"}
         fetchPriority={eager ? "high" : undefined}
         decoding="async"
-        width={1500}
-        height={750}
+        width={locale === "HR" ? 1620 : 1500}
+        height={locale === "HR" ? 675 : 750}
         className="absolute top-0 h-full max-w-none object-cover"
         style={{ width: "300%", left: `-${index * 100}%` }}
       />
-      <div
+      {locale === "EN" && <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#020406]/90 via-[#020406]/10 via-45% to-[#020406]/45"
-      />
-      <div className="pointer-events-none absolute left-[7%] right-[7%] top-[7%]">
+      />}
+      {locale === "EN" && <div className="pointer-events-none absolute left-[7%] right-[7%] top-[7%]">
         <p className="mb-7 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70">
           {String(index + 1).padStart(2, "0")} / 03
         </p>
@@ -76,10 +76,10 @@ export function MarketingCampaignPhoto({
         <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/70 sm:text-xs">
           {copy.subtitle}
         </p>
-      </div>
-      <div aria-hidden="true" className="pointer-events-none absolute bottom-[6%] left-[7%] right-[7%] border-t border-white/35 pt-3 text-[9px] font-medium uppercase tracking-[0.14em] text-white/70">
+      </div>}
+      {locale === "EN" && <div aria-hidden="true" className="pointer-events-none absolute bottom-[6%] left-[7%] right-[7%] border-t border-white/35 pt-3 text-[9px] font-medium uppercase tracking-[0.14em] text-white/70">
         {locale === "HR" ? "Kreativni koncept / Premium detailing" : "Creative concept / Premium detailing"}
-      </div>
+      </div>}
     </div>
   );
 }
