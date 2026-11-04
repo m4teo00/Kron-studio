@@ -47,20 +47,21 @@ const COPY = {
     back: "Natrag na projekte",
     badge: "Kreativni radovi / Konceptualni projekt",
     title: "SVJETLO OTKRIVA SVE.",
-    lead: "Marketinška kampanja za premium detailing, nastala iz stvarnog uvida u proces korekcije laka.",
+    lead: "Koncept kampanje za premium detailing studio. Tri kadra prate ono što profesionalna korekcija laka podrazumijeva: pregled, obradu i završnu provjeru."
     galleryTitle: "Tri kadra. Jedna ideja.",
     galleryLabel: "Oglasni vizuali",
-    gallery: ["Glavna poruka", "Proces i preciznost", "Završna obrada"],
-    posterTitles: ["SVJETLO OTKRIVA SVE.", "NEMA MJESTA PREČACIMA.", "ZAŠTITA KOJA SE VIDI."],
+    gallery: ["Pregled laka", "Korekcija laka", "Završna provjera"],
+    posterTitles: ["SVJETLO OTKRIVA SVE.", "KOREKCIJA LAKA.", "ZAVRŠNA PROVJERA."],
+    posterSubtitles: ["Svjetlo otkriva stanje površine.", "Precizan rad pod kontroliranim svjetlom.", "Odraz potvrđuje završnu obradu."],
     conceptTitle: "Ideja koja proizlazi iz same usluge.",
     story: [
       "U oglašavanju automobilske njege često se ponavljaju iste poruke o sjaju i čistoći. Za ovaj koncept krenuli smo od konkretne radnje koju profesionalci koriste pri provjeri površine — promatranja laka pod kontroliranim svjetlom.",
       "Uska linija svjetla otkriva ono što je pri običnom pogledu lako previdjeti. Taj je trenutak postao središte kampanje: od kratkog naslova do kontrasta, kompozicije i precizne tipografije.",
-      "Nastala su tri povezana vizuala. Prvi privlači pozornost, drugi naglašava disciplinu procesa, a treći stavlja fokus na završnu obradu.",
+      "Kampanja se razvija kroz tri povezana kadra: pregled površine, korekciju laka i završnu provjeru. Svaki kadar ima jasnu ulogu, a sve ih povezuje isto kontrolirano svjetlo.",
     ],
     deliverTitle: "Što smo izradili",
     deliver: ["Kreativni koncept i slogan", "3 oglasa za društvene mreže", "Art direction i tekstovi", "Dvojezični portfolio prikaz"],
-    note: "Ovo je samostalna konceptualna kampanja, a ne projekt naručen od klijenta. Korištene su fotografije s platforme Pexels (Jae Park, Tima Miroshnichenko, Erik Mclean). Ovo nije prikaz rezultata stvarnog tretmana niti suradnja s prikazanim automobilskim brendovima.",
+    note: "Samostalni kreativni koncept, nije projekt stvarnog klijenta. Fotografije su referentni materijali s platforme Pexels; ne predstavljaju stvarne rezultate obrade niti suradnju s prikazanim automobilskim brendovima.",
     ctaTitle: "Vaš proizvod zaslužuje jasnu ideju.",
     cta: "Razgovarajmo o kampanji",
     close: "Zatvori pregled",
@@ -71,20 +72,21 @@ const COPY = {
     back: "Back to projects",
     badge: "Creative work / Concept project",
     title: "LIGHT REVEALS EVERYTHING.",
-    lead: "A premium detailing campaign inspired by the real-world process of inspecting paintwork.",
+    lead: "A premium detailing campaign concept. Three connected frames follow the process: inspection, correction and final quality control."
     galleryTitle: "Three frames. One idea.",
     galleryLabel: "Advertising visuals",
-    gallery: ["The central message", "Process and precision", "The final finish"],
-    posterTitles: ["LIGHT REVEALS EVERYTHING.", "NO ROOM FOR SHORTCUTS.", "PROTECTION YOU CAN SEE."],
+    gallery: ["Paint inspection", "Paint correction", "Final inspection"],
+    posterTitles: ["LIGHT REVEALS EVERYTHING.", "PAINT CORRECTION.", "FINAL INSPECTION."],
+    posterSubtitles: ["Inspection light reveals the surface.", "Controlled, precise paint correction.", "The reflection confirms the finish."],
     conceptTitle: "An idea rooted in the service itself.",
     story: [
       "Automotive detailing ads often rely on the same promises of shine and cleanliness. This concept starts with an action professionals actually use to assess the finish: examining paintwork under controlled light.",
       "A narrow strip of light reveals what an everyday glance can miss. We built the campaign around that moment, from the concise headline to the contrast, composition and typography.",
-      "The outcome is a connected set of three visuals. One captures attention, the second communicates care in the process, and the third focuses on the finished surface.",
+      "The campaign unfolds in three connected frames: surface inspection, paint correction and final quality control. Each frame has a distinct purpose, linked by the same controlled light.",
     ],
     deliverTitle: "Project deliverables",
     deliver: ["Creative idea and campaign line", "3 social media advertisements", "Art direction and copywriting", "Bilingual portfolio presentation"],
-    note: "This is an independent concept campaign, not commissioned client work. Photography sourced from Pexels (Jae Park, Tima Miroshnichenko, Erik Mclean). These visuals do not depict actual detailing results or any partnership with the automotive brands shown.",
+    note: "Independent creative concept, not commissioned client work. Pexels photography is used as reference material. These images do not depict actual detailing results or imply automotive brand partnerships.",
     ctaTitle: "Your product deserves a clear idea.",
     cta: "Discuss a campaign",
     close: "Close gallery",
@@ -159,7 +161,7 @@ function MarketingCaseStudy() {
                 <div className="relative aspect-[4/5] overflow-hidden bg-[#090d11]">
                   <img src={src} alt={copy.gallery[i]} width="1080" height="1350" loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"/>
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#070a0d]/85 via-transparent to-[#070a0d]/40"/>
-                  <p className="pointer-events-none absolute left-5 right-5 top-7 max-w-[85%] text-2xl font-black uppercase leading-tight tracking-[-.035em] text-white sm:text-xl lg:text-3xl">{copy.posterTitles[i]}</p>
+                  <div className="pointer-events-none absolute inset-x-0 top-0 px-6 pt-8"><span className="mb-4 block text-[10px] font-semibold uppercase tracking-[0.25em] text-white/70">0{i + 1} / 03</span><p className="max-w-[90%] text-2xl font-black uppercase leading-tight tracking-[-.035em] text-white sm:text-xl lg:text-3xl">{copy.posterTitles[i]}</p><p className="mt-3 max-w-[90%] text-xs leading-5 text-white/75">{copy.posterSubtitles[i]}</p></div>
                 </div>
                 <div className="flex items-center justify-between gap-4 p-5 text-sm"><span>{String(i + 1).padStart(2,"0")} / {copy.gallery[i]}</span><ArrowUpRight size={18} aria-hidden="true"/></div>
               </button>
@@ -195,7 +197,7 @@ function MarketingCaseStudy() {
           <div className="relative mx-auto w-full max-w-[560px] overflow-hidden">
             <img src={images[active]} alt={copy.gallery[active]} width="1080" height="1350" className="mx-auto max-h-[calc(95vh-132px)] w-full object-cover"/>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/75 via-transparent to-black/35" />
-            <h3 className="pointer-events-none absolute left-[7%] right-[7%] top-[7%] text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">{copy.posterTitles[active]}</h3>
+            <div className="pointer-events-none absolute left-[7%] right-[7%] top-[7%]"><span className="mb-4 block text-xs font-semibold uppercase tracking-[0.24em] text-white/70">0{active + 1} / 03</span><h3 className="max-w-[92%] text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">{copy.posterTitles[active]}</h3><p className="mt-4 max-w-[80%] text-sm text-white/75">{copy.posterSubtitles[active]}</p></div>
           </div>
         </div>
         <div className="flex items-center justify-between border-t border-white/10 px-4 py-2">
