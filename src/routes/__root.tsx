@@ -78,25 +78,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "KRON — Formally Educated Web Design & Next.js Engineering" },
+      { title: "KRON Studio | Websites, Apps, Marketing & AI Solutions" },
       {
         name: "description",
         content:
-          "Custom, high-performance Next.js websites built by a formally educated web designer. Lightning-fast load times, clean aesthetics, and zero latency.",
+          "KRON Studio creates modern websites, business applications, marketing campaigns and AI automation tailored to help your business grow.",
       },
       {
         name: "keywords",
         content:
-          "Next.js developer, web dizajn, izrada web stranica, UI/UX dizajn, high-performance websites, KRON digital studio",
+          "KRON Studio, web design, web development, business applications, digital marketing, AI automation, izrada web-stranica",
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "KRON Digital Studio" },
-      { property: "og:image", content: "https://krondigital.com/og-image.png" },
+      { property: "og:image", content: "https://kron-studio.vercel.app/og-image.png" },
       { property: "og:image:width", content: "1424" },
       { property: "og:image:height", content: "752" },
-      { property: "og:image:alt", content: "High-Performance Next.js Web Development — KRON" },
+      {
+        property: "og:image:alt",
+        content: "KRON Studio — digital solutions for growing businesses",
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://krondigital.com/og-image.png" },
+      { name: "twitter:image", content: "https://kron-studio.vercel.app/og-image.png" },
     ],
     links: [
       {
@@ -119,8 +122,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  // Use the selected locale in server-rendered HTML, not only after hydration.
+  const router = useRouter();
+  const search = router.state.location.search as { lang?: string };
+  const pageLanguage = search?.lang === "HR" ? "hr" : "en";
+
   return (
-    <html lang="en">
+    <html lang={pageLanguage}>
       <head>
         <HeadContent />
       </head>

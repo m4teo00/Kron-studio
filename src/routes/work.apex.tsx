@@ -32,6 +32,7 @@ export const Route = createFileRoute("/work/apex")({
       },
       { property: "og:type", content: "article" },
     ],
+    links: [{ rel: "canonical", href: "https://krondigital.com/work/apex" }],
   }),
   component: ApexCaseStudy,
 });

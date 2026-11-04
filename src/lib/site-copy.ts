@@ -1,5 +1,14 @@
 export type Locale = "EN" | "HR";
 
+type ProjectCopy = {
+  badge: string;
+  category: string;
+  title: string;
+  description: string;
+  imageAlt: string;
+  stats: string[];
+};
+
 export interface SiteCopy {
   navigation: string[];
   languageLabel: string;
@@ -9,14 +18,22 @@ export interface SiteCopy {
     badge: string;
     headline: string;
     subtitle: string;
-    cta: string;
+    projectsCta: string;
+    quoteCta: string;
   };
   services: {
     badge: string;
     heading: string;
-    cards: { title: string; body: string; imageAlt: string }[];
+    cards: { title: string; body: string }[];
   };
-  work: { badge: string; heading: string };
+  growth: { badge: string; heading: string; body: string };
+  work: {
+    badge: string;
+    heading: string;
+    creativeTitle: string;
+    comingSoon: string;
+    concepts: string[];
+  };
   process: {
     badge: string;
     heading: string;
@@ -56,157 +73,154 @@ export interface SiteCopy {
     resume: string;
     previous: string;
     next: string;
-    projects: {
-      apex: {
-        badge: string;
-        category: string;
-        title: string;
-        description: string;
-        imageAlt: string;
-        stats: string[];
-      };
-      kelava: {
-        badge: string;
-        category: string;
-        title: string;
-        description: string;
-        imageAlt: string;
-        stats: string[];
-      };
-    };
+    projects: { cavaliero: ProjectCopy; kelava: ProjectCopy; apex: ProjectCopy };
   };
 }
 
 export const SITE_COPY: Record<Locale, SiteCopy> = {
   EN: {
-    navigation: ["Services", "Work", "Process", "Contact"],
+    navigation: ["Services", "Work", "Approach", "Contact"],
     languageLabel: "Choose language",
     menuOpen: "Open menu",
     menuClose: "Close menu",
     hero: {
-      badge: "High-Performance Web Architecture",
-      headline: "We build zero-latency digital platforms for ambitious brands.",
+      badge: "Digital solutions for growing businesses",
+      headline: "Your business deserves more than just an online presence.",
       subtitle:
-        "Next.js, Tailwind CSS, and Edge CDN solutions focused on speed, aesthetic precision, and mobile conversion.",
-      cta: "Send Inquiry ↗",
+        "We build websites, business apps, marketing campaigns and AI solutions that help attract customers, make a stronger impression and save time.",
+      projectsCta: "View Projects",
+      quoteCta: "Request a Quote",
     },
     services: {
-      badge: "Core Expertise",
-      heading: "Systems we build.",
+      badge: "What we do",
+      heading: "Practical digital solutions, made for your business.",
       cards: [
         {
-          title: "Bespoke Web Architecture",
-          body: "Custom React / Next.js platforms built from scratch for lightning performance and conversion.",
-          imageAlt: "Website analytics dashboard with performance metrics",
+          title: "Websites",
+          body: "Modern, fast, mobile-friendly websites that build trust and make it easier for people to get in touch.",
         },
         {
-          title: "Instagram Direct Response Systems",
-          body: "Always-on lead intake via DM & comments. Converts social engagement and story replies directly into structured client inquiries.",
-          imageAlt: "Instagram content and direct response campaign",
+          title: "Business Applications",
+          body: "Ordering, booking, customer management and inventory tools shaped around the way your business works.",
         },
         {
-          title: "Visual Brand Identity",
-          body: "Complete luxury design systems, editorial typography, color theory and digital guidelines.",
-          imageAlt: "Editorial brand identity and design guidelines",
+          title: "Digital Marketing",
+          body: "Social campaigns, advertising visuals and creative content—supported by a strategy with a clear purpose.",
+        },
+        {
+          title: "AI Agents & Automation",
+          body: "Helpful customer support, lead collection, product recommendations and repetitive tasks handled automatically.",
         },
       ],
     },
-    work: { badge: "Selected Work", heading: "Crafted for Speed & Conversion" },
+    growth: {
+      badge: "Digital growth",
+      heading: "Your customers are already online. Are you where they look?",
+      body: "A first impression often happens before the first conversation. A quality website builds trust, good marketing earns attention, and thoughtful digital tools make everyday work easier. We bring these pieces together in solutions shaped around your business.",
+    },
+    work: {
+      badge: "Selected work",
+      heading: "Digital work with a clear purpose.",
+      creativeTitle: "Creative Work",
+      comingSoon: "Coming soon",
+      concepts: ["Automotive Campaign · Concept", "Hospitality Campaign · Concept"],
+    },
     process: {
-      badge: "The KRON 4-Step Engineering Protocol",
-      heading: "Our Methodology: From Blueprint to Launch",
-      phaseLabel: "Phase",
+      badge: "A clear, collaborative process",
+      heading: "From your first idea to a solution that works.",
+      phaseLabel: "Step",
       phases: [
         {
-          title: "Strategy & Digital Blueprint",
-          body: "In-depth analysis of business objectives, conversion funnels and customer journeys. We map out a bespoke architectural blueprint designed to convert visitors into clients.",
+          title: "Understand the goal",
+          body: "We learn about your business, your customers and what you want to improve before recommending a direction.",
         },
         {
-          title: "Visual & Interface Engineering",
-          body: "Custom Swiss-editorial design crafted from scratch. High-contrast typography, brand elements and fluid layouts with zero generic templates.",
+          title: "Shape the experience",
+          body: "We plan the structure and visual direction around your brand, your audience and the task at hand.",
         },
         {
-          title: "Full-Stack Development & Pipeline Setup",
-          body: "Custom Next.js / React engineering with sub-second performance. In parallel we configure the 24/7 Instagram DM & comment lead routing system.",
+          title: "Build and refine",
+          body: "We develop the agreed solution, share progress and refine the details with your feedback.",
         },
         {
-          title: "Rigorous QA & 100% Asset Ownership Handoff",
-          body: "Comprehensive cross-device testing, speed optimization and live deployment. Full transfer of code, digital assets — zero agency lock-in.",
+          title: "Launch with confidence",
+          body: "We test the experience across devices, help you go live and make sure you know how to move forward.",
         },
       ],
     },
     faq: {
-      badge: "FAQ",
-      heading: "Essentials.",
+      badge: "Frequently asked questions",
+      heading: "A few things worth knowing.",
       items: [
         {
-          question: "How long does a typical project take?",
+          question: "How long does a project take?",
           answer:
-            "Most bespoke web platforms and Instagram pipelines are delivered fully functional in 7 to 14 days.",
+            "Every project is different. After we understand the scope, we will share a realistic timeline before work begins.",
         },
         {
-          question: "Do I own the platform after launch?",
+          question: "Will the solution fit the way my business works?",
           answer:
-            "Yes. You receive 100% full ownership of the code, digital assets, and infrastructure.",
+            "Yes. We start by understanding your goals and day-to-day needs, then shape the right solution around them.",
         },
         {
-          question: "How do we get started?",
+          question: "How do I get started?",
           answer:
-            "Fill out the private inquiry form below. We review your goals and get back to you within 24 hours.",
+            "Tell us a little about your idea or challenge using the inquiry form. We will get back to you to discuss the next step.",
         },
       ],
     },
     founder: {
-      title: "Founder & Designer",
+      title: "Your digital partner",
       name: "Mateo Kelava",
-      bio: "Formally educated web designer. I build custom, high-performance Next.js websites for businesses that value clean aesthetics and fast load times.",
-      cta: "Send Inquiry ↗",
-      imageAlt: "Founder in a black suit and burgundy bow tie in front of a modern glass building",
+      bio: "I help businesses make a thoughtful, confident move online. From the first conversation to launch, you work directly with me and get a solution shaped around what your business actually needs.",
+      cta: "Let’s talk about your project",
+      imageAlt: "KRON Studio founder Mateo Kelava",
     },
     inquiry: {
-      badge: "Executive Private Inquiry",
-      heading: "Let's discuss your next digital platform.",
-      description: "Send us a message with your project details and we'll respond within 24 hours.",
-      received: "Inquiry Received.",
-      response: "Our engineering team will review your site and respond within 24 hours.",
-      formTitle: "PRIVATE INQUIRY",
+      badge: "Start a conversation",
+      heading: "Tell us what you would like to improve.",
+      description:
+        "Have an idea or a problem you want to solve? Tell us what you need and we will find the right solution.",
+      received: "Your message has been received.",
+      response: "Thank you for reaching out. We will be in touch to discuss your project.",
+      formTitle: "Project inquiry",
       formLabels: {
         name: "Name / Company",
-        website: "Current Website URL",
+        website: "Current website (optional)",
         contact: "Email",
-        message: "Project Scope & Goals",
+        message: "What do you need?",
       },
       placeholders: {
-        name: "Your Name",
+        name: "Your name or company",
         website: "https://yourwebsite.com",
-        contact: "Your Email",
-        message: "Project details or questions...",
+        contact: "you@example.com",
+        message: "Tell us about your idea or challenge…",
       },
-      submit: "Send Inquiry",
+      submit: "Request a Quote",
     },
-    footer: "Digital Architecture & Growth Studio",
+    footer: "Digital solutions for growing businesses",
     carousel: {
       region: "Featured studio projects",
-      selectedWork: "Selected Work",
+      selectedWork: "Selected work",
       chooseProject: "Choose featured project",
       showProject: "Show project",
-      howBuilt: "How it was built",
-      liveDemo: "Launch Live Demo",
+      howBuilt: "How It Was Built",
+      liveDemo: "View Live Website",
       paused: "Paused",
-      autoPlay: "Auto play · 5 sec",
+      autoPlay: "Auto-advance · 5 sec",
       pause: "Pause carousel",
       resume: "Resume carousel",
-      previous: "Previous featured project",
-      next: "Next featured project",
+      previous: "Previous project",
+      next: "Next project",
       projects: {
-        apex: {
-          badge: "Concept & Prototype No. 01",
-          category: "Architectural Showcase & Infrastructure",
-          title: "APEX — High-Performance Architectural Engine",
+        cavaliero: {
+          badge: "Real Client Project",
+          category: "Web Design & Development",
+          title: "Cavaliero — Restaurant & Apartments",
           description:
-            "Built as the foundational internal benchmark for KRON Digital Studio. Demonstrates how complex architectural renders load instantly with zero layout shifts via Next.js React Server Components.",
-          imageAlt: "Modern architectural residence framed by trees at dusk",
-          stats: ["< 0.8s Load", "Next.js RSC", "Zero Layout Shift"],
+            "A modern bilingual website presenting the restaurant, atmosphere and apartments through elegant design, fast loading and seamless reservation contact.",
+          imageAlt: "Screenshot of the Cavaliero restaurant and apartments website homepage",
+          stats: ["Real client project", "Bilingual website", "Restaurant & apartments"],
         },
         kelava: {
           badge: "Client Case Study · Heritage & Craft",
@@ -217,139 +231,162 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
           imageAlt: "Carefully crafted furniture in a warm, contemporary interior",
           stats: ["99/100 Lighthouse", "< 0.8s Load", "Mobile Lead Optimized"],
         },
+        apex: {
+          badge: "Concept & Prototype No. 01",
+          category: "Architectural Showcase & Infrastructure",
+          title: "APEX — High-Performance Architectural Engine",
+          description:
+            "Built as the foundational internal benchmark for KRON Digital Studio. Demonstrates how complex architectural renders load instantly with zero layout shifts via Next.js React Server Components.",
+          imageAlt: "Modern architectural residence framed by trees at dusk",
+          stats: ["< 0.8s Load", "Next.js RSC", "Zero Layout Shift"],
+        },
       },
     },
   },
   HR: {
-    navigation: ["Usluge", "Radovi", "Proces", "Kontakt"],
+    navigation: ["Usluge", "Projekti", "Pristup", "Kontakt"],
     languageLabel: "Odaberite jezik",
     menuOpen: "Otvori izbornik",
     menuClose: "Zatvori izbornik",
     hero: {
-      badge: "Web Arhitektura Visokih Performansi",
-      headline: "Gradimo iznimno brze digitalne platforme za ambiciozne brendove.",
+      badge: "Digitalna rješenja za rast poslovanja",
+      headline: "Vaše poslovanje zaslužuje više od same prisutnosti na internetu.",
       subtitle:
-        "Next.js, Tailwind CSS i Edge CDN rješenja fokusirana na brzinu, estetsku preciznost i mobilne konverzije.",
-      cta: "Pošalji Upit ↗",
+        "Izrađujemo web-stranice, poslovne aplikacije, marketinške kampanje i AI rješenja koja pomažu privući klijente, ostaviti bolji dojam i uštedjeti vrijeme.",
+      projectsCta: "Pogledajte projekte",
+      quoteCta: "Zatražite ponudu",
     },
     services: {
-      badge: "Naša Stručnost",
-      heading: "Sustavi koje gradimo.",
+      badge: "Čime se bavimo",
+      heading: "Digitalna rješenja koja odgovaraju vašem poslovanju.",
       cards: [
         {
-          title: "Prilagođena web arhitektura",
-          body: "React / Next.js platforme izrađene od nule za vrhunske performanse i konverzije.",
-          imageAlt: "Nadzorna ploča web analitike s pokazateljima performansi",
+          title: "Web-stranice",
+          body: "Moderne, brze i prilagođene mobitelima — web-stranice koje grade povjerenje i olakšavaju slanje upita.",
         },
         {
-          title: "Instagram sustavi izravnog odgovora",
-          body: "Stalan priljev upita putem poruka i komentara. Pretvara angažman na društvenim mrežama u strukturirane upite klijenata.",
-          imageAlt: "Instagram sadržaj i kampanja izravnog odgovora",
+          title: "Poslovne aplikacije",
+          body: "Sustavi za naručivanje, rezervacije, upravljanje klijentima i zalihama, prilagođeni načinu rada vašeg poslovanja.",
         },
         {
-          title: "Vizualni identitet brenda",
-          body: "Cjeloviti luksuzni dizajnerski sustavi, urednička tipografija, teorija boja i digitalne smjernice.",
-          imageAlt: "Urednički vizualni identitet brenda i dizajnerske smjernice",
+          title: "Digitalni marketing",
+          body: "Kampanje na društvenim mrežama, oglasni vizuali i kreativni sadržaj uz strategiju koja ima jasan cilj.",
+        },
+        {
+          title: "AI agenti i automatizacije",
+          body: "Korisnička podrška, prikupljanje upita, preporuke proizvoda i ponavljajući zadaci — uz pomoć automatizacije.",
         },
       ],
     },
-    work: { badge: "Odabrani Radovi", heading: "Izrađeno za Brzinu i Konverziju" },
+    growth: {
+      badge: "Digitalni rast",
+      heading: "Vaši klijenti već su online. Jeste li vi tamo gdje vas traže?",
+      body: "Prvi dojam često nastaje prije prvog razgovora. Kvalitetna web-stranica gradi povjerenje, dobar marketing privlači pažnju, a pametna digitalna rješenja olakšavaju svakodnevni posao. Mi sve to povezujemo u rješenja prilagođena vašem poslovanju.",
+    },
+    work: {
+      badge: "Odabrani radovi",
+      heading: "Digitalni projekti s jasnom svrhom.",
+      creativeTitle: "Kreativni radovi",
+      comingSoon: "U pripremi",
+      concepts: ["Automobilska kampanja · Koncept", "Ugostiteljska kampanja · Koncept"],
+    },
     process: {
-      badge: "Inženjerski proces studija KRON u 4 koraka",
-      heading: "Naša metodologija: od nacrta do lansiranja",
-      phaseLabel: "Faza",
+      badge: "Jasan i suradnički proces",
+      heading: "Od prve ideje do rješenja koje funkcionira.",
+      phaseLabel: "Korak",
       phases: [
         {
-          title: "Strategija i digitalni nacrt",
-          body: "Detaljna analiza poslovnih ciljeva, prodajnih tokova i korisničkih putovanja. Izrađujemo prilagođeni arhitektonski nacrt koji posjetitelje pretvara u klijente.",
+          title: "Razumijevanje cilja",
+          body: "Upoznajemo vaše poslovanje, klijente i ono što želite unaprijediti prije nego što predložimo smjer.",
         },
         {
-          title: "Vizualni dizajn i razvoj sučelja",
-          body: "Jedinstven dizajn u švicarskom uredničkom stilu. Izražajna tipografija, elementi brenda i fluidni rasporedi bez generičkih predložaka.",
+          title: "Oblikovanje iskustva",
+          body: "Planiramo strukturu i vizualni smjer prema vašem brendu, publici i konkretnom cilju.",
         },
         {
-          title: "Razvoj cjelovitih sustava i postavljanje upita",
-          body: "Razvoj u Next.jsu i Reactu s učitavanjem kraćim od sekunde. Paralelno postavljamo Instagram sustav za usmjeravanje upita putem poruka i komentara.",
+          title: "Izrada i dorada",
+          body: "Razvijamo dogovoreno rješenje, redovito dijelimo napredak i dorađujemo ga uz vaše povratne informacije.",
         },
         {
-          title: "Temeljito testiranje i potpuna predaja imovine",
-          body: "Testiranje na svim uređajima, optimizacija brzine i objava. Preuzimate sav kod i digitalnu imovinu — bez vezivanja uz agenciju.",
+          title: "Sigurna objava",
+          body: "Provjeravamo iskustvo na različitim uređajima, pomažemo pri objavi i objašnjavamo sljedeće korake.",
         },
       ],
     },
     faq: {
-      badge: "ČPP",
-      heading: "Najvažnije informacije.",
+      badge: "Česta pitanja",
+      heading: "Nekoliko važnih odgovora.",
       items: [
         {
-          question: "Koliko obično traje projekt?",
+          question: "Koliko traje projekt?",
           answer:
-            "Većina prilagođenih web platformi i Instagram sustava upita spremna je za rad u roku od 7 do 14 dana.",
+            "Svaki je projekt drukčiji. Nakon što utvrdimo opseg, prije početka rada dogovorit ćemo realan rok.",
         },
         {
-          question: "Postaje li platforma moja nakon objave?",
+          question: "Hoće li rješenje odgovarati načinu rada mog poslovanja?",
           answer:
-            "Da. Dobivate potpuno vlasništvo nad kodom, digitalnom imovinom i infrastrukturom.",
+            "Da. Najprije upoznajemo vaše ciljeve i svakodnevne potrebe, a zatim prema njima oblikujemo odgovarajuće rješenje.",
         },
         {
           question: "Kako možemo započeti?",
           answer:
-            "Ispunite obrazac za privatni upit u nastavku. Pregledat ćemo vaše ciljeve i odgovoriti u roku od 24 sata.",
+            "U obrascu za upit ukratko nam opišite svoju ideju ili izazov. Javit ćemo vam se kako bismo dogovorili sljedeći korak.",
         },
       ],
     },
     founder: {
-      title: "Osnivač i Dizajner",
+      title: "Vaš partner za digitalna rješenja",
       name: "Mateo Kelava",
-      bio: "Školovani web dizajner. Izrađujem brze i čiste Next.js web stranice za klijente kojima su važni vrhunski dizajn i besprijekorne performanse.",
-      cta: "Pošalji Upit ↗",
-      imageAlt: "Osnivač u crnom odijelu i bordo leptir-mašni ispred moderne staklene zgrade",
+      bio: "Pomažem poduzećima da se kvalitetno i s povjerenjem predstave online. Od prvog razgovora do objave surađujete izravno sa mnom, a rješenje oblikujemo prema stvarnim potrebama vašeg poslovanja.",
+      cta: "Razgovarajmo o vašem projektu",
+      imageAlt: "Osnivač studija KRON Mateo Kelava",
     },
     inquiry: {
-      badge: "Privatni Upit za Suradnju",
-      heading: "Razgovarajmo o vašoj sljedećoj digitalnoj platformi.",
+      badge: "Započnimo razgovor",
+      heading: "Recite nam što želite unaprijediti.",
       description:
-        "Pošaljite nam poruku s detaljima vašeg projekta i odgovorit ćemo u roku od 24 sata.",
-      received: "Upit je zaprimljen.",
-      response: "Naš inženjerski tim pregledat će vašu stranicu i odgovoriti u roku od 24 sata.",
-      formTitle: "PRIVATNI UPIT",
+        "Imate ideju ili problem koji želite riješiti? Recite nam što vam treba i pronaći ćemo pravo rješenje.",
+      received: "Vaša je poruka zaprimljena.",
+      response:
+        "Hvala što ste nam se javili. Kontaktirat ćemo vas kako bismo razgovarali o projektu.",
+      formTitle: "Upit o projektu",
       formLabels: {
-        name: "Ime / Tvrtka",
-        website: "URL vaše web stranice",
+        name: "Ime / tvrtka",
+        website: "Postojeća web-stranica (nije obvezno)",
         contact: "E-pošta",
-        message: "Opseg projekta i ciljevi",
+        message: "Što vam je potrebno?",
       },
       placeholders: {
-        name: "Vaše Ime",
+        name: "Vaše ime ili naziv tvrtke",
         website: "https://vasastranica.com",
-        contact: "Vaš Email",
-        message: "Detalji projekta ili pitanja...",
+        contact: "vi@primjer.hr",
+        message: "Opišite nam svoju ideju ili izazov…",
       },
-      submit: "Pošalji Upit",
+      submit: "Zatražite ponudu",
     },
-    footer: "Studio za digitalnu arhitekturu i rast",
+    footer: "Digitalna rješenja za rast poslovanja",
     carousel: {
       region: "Istaknuti projekti studija",
       selectedWork: "Odabrani radovi",
       chooseProject: "Odaberite istaknuti projekt",
       showProject: "Prikaži projekt",
-      howBuilt: "Kako je nastalo",
-      liveDemo: "Pokreni Live Demo",
+      howBuilt: "Kako je nastao",
+      liveDemo: "Pogledajte web-stranicu",
       paused: "Zaustavljeno",
-      autoPlay: "Automatski prikaz · 5 s",
+      autoPlay: "Automatska izmjena · 5 s",
       pause: "Zaustavi vrtuljak projekata",
       resume: "Nastavi vrtuljak projekata",
-      previous: "Prethodni istaknuti projekt",
-      next: "Sljedeći istaknuti projekt",
+      previous: "Prethodni projekt",
+      next: "Sljedeći projekt",
       projects: {
-        apex: {
-          badge: "Koncept i prototip br. 01",
-          category: "Arhitektonska prezentacija i infrastruktura",
-          title: "APEX — arhitektonska platforma visokih performansi",
+        cavaliero: {
+          badge: "Stvarni projekt za klijenta",
+          category: "Web-dizajn i razvoj",
+          title: "Cavaliero — restoran i apartmani",
           description:
-            "Izrađen kao temeljni interni standard za KRON Digital Studio. Pokazuje kako se složeni arhitektonski prikazi učitavaju trenutačno, bez pomicanja sadržaja, uz Next.js React Server Components.",
-          imageAlt: "Suvremena arhitektonska kuća okružena drvećem u sumrak",
-          stats: ["Učitavanje < 0,8 s", "Next.js RSC", "Bez pomicanja sadržaja"],
+            "Moderna, dvojezična web-stranica koja predstavlja restoran, ambijent i apartmane kroz elegantan dizajn, brzo učitavanje i jednostavan kontakt za rezervacije.",
+          imageAlt: "Snimka početne stranice web-stranice restorana i apartmana Cavaliero",
+          stats: ["Stvarni projekt", "Dvojezična web-stranica", "Restoran i apartmani"],
         },
         kelava: {
           badge: "Studija slučaja · Baština i obrt",
@@ -359,6 +396,15 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
             "Digitalna platforma visokih konverzija za specijalizirani obrt za restauraciju namještaja. Uklanja uska grla pri prikazu fotografija visoke rezolucije i omogućuje izravne upite putem WhatsAppa i poziva s mobitela.",
           imageAlt: "Pažljivo izrađen namještaj u toplom, suvremenom interijeru",
           stats: ["Lighthouse 99/100", "Učitavanje < 0,8 s", "Upiti s mobitela"],
+        },
+        apex: {
+          badge: "Koncept i prototip br. 01",
+          category: "Arhitektonska prezentacija i infrastruktura",
+          title: "APEX — arhitektonska platforma visokih performansi",
+          description:
+            "Izrađen kao temeljni interni standard za KRON Digital Studio. Pokazuje kako se složeni arhitektonski prikazi učitavaju trenutačno, bez pomicanja sadržaja, uz Next.js React Server Components.",
+          imageAlt: "Suvremena arhitektonska kuća okružena drvećem u sumrak",
+          stats: ["Učitavanje < 0,8 s", "Next.js RSC", "Bez pomicanja sadržaja"],
         },
       },
     },

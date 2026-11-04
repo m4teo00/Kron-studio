@@ -32,6 +32,7 @@ export const Route = createFileRoute("/work/restauracija-kelava")({
       },
       { property: "og:type", content: "article" },
     ],
+    links: [{ rel: "canonical", href: "https://krondigital.com/work/restauracija-kelava" }],
   }),
   component: RestauracijaKelavaCaseStudy,
 });
