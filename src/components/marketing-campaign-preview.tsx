@@ -6,17 +6,17 @@ const COPY = {
   HR: {
     eyebrow: "Kreativni radovi / Konceptualna kampanja",
     title: "SVJETLO OTKRIVA SVE.",
-    text: "Kampanja za premium njegu automobila, izgrađena oko jednog prepoznatljivog trenutka — provjere završne obrade pod kontroliranim svjetlom.",
+    text: "Tri oglasa s jasnim ciljem: zaustaviti pogled, objasniti vrijednost usluge i potaknuti upit.",
     action: "Istražite kampanju",
-    note: "Kreativni koncept · 3 oglasna vizuala",
+    note: "Kreativni koncept · 3 oglasa · HR/EN · CTA",
     alt: "Konceptualna kampanja za premium detailing",
   },
   EN: {
     eyebrow: "Creative work / Concept campaign",
     title: "LIGHT REVEALS EVERYTHING.",
-    text: "A premium automotive detailing concept built around one unmistakable moment — inspecting the finish under controlled light.",
+    text: "Three connected ads designed to earn attention, explain the service and invite an enquiry.",
     action: "Explore the campaign",
-    note: "Creative concept · 3 advertising visuals",
+    note: "Creative concept · 3 ads · HR/EN · CTA",
     alt: "Premium automotive detailing concept campaign",
   },
 } as const;
