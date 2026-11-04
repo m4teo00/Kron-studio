@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "KRON Digital Studio" },
-      { property: "og:image", content: "https://krondigital.com/og-image.png" },
+      { property: "og:image", content: "https://kron-studio.vercel.app/og-image.png" },
       { property: "og:image:width", content: "1424" },
       { property: "og:image:height", content: "752" },
       {
@@ -99,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "KRON Studio — digital solutions for growing businesses",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://krondigital.com/og-image.png" },
+      { name: "twitter:image", content: "https://kron-studio.vercel.app/og-image.png" },
     ],
     links: [
       {
@@ -122,8 +122,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  // Use the selected locale in server-rendered HTML, not only after hydration.
+  const router = useRouter();
+  const search = router.state.location.search as { lang?: string };
+  const pageLanguage = search?.lang === "HR" ? "hr" : "en";
+
   return (
-    <html lang="en">
+    <html lang={pageLanguage}>
       <head>
         <HeadContent />
       </head>
